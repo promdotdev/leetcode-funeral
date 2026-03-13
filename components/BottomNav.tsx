@@ -9,12 +9,12 @@ export default function BottomNav() {
   const { progress, hydrated } = useGameState();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-accent/30 bg-black/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-[375px] items-stretch">
         <Link
           href="/grid"
-          className={`flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium transition-colors ${
-            pathname === '/grid' ? 'text-accent' : 'text-secondary'
+          className={`flex flex-1 flex-col items-center gap-0.5 py-3 font-[family-name:var(--font-terminal)] text-xs uppercase tracking-wider transition-colors ${
+            pathname === '/grid' ? 'text-accent' : 'text-muted'
           }`}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -25,15 +25,15 @@ export default function BottomNav() {
           </svg>
           <span>Grid</span>
           {hydrated && (
-            <span className="rounded-full bg-accent px-1.5 py-0.5 text-[10px] font-bold text-white">
+            <span className="rounded-sm bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold text-accent">
               {progress.clues}/24
             </span>
           )}
         </Link>
         <Link
           href="/suspects"
-          className={`flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium transition-colors ${
-            pathname === '/suspects' ? 'text-accent' : 'text-secondary'
+          className={`flex flex-1 flex-col items-center gap-0.5 py-3 font-[family-name:var(--font-terminal)] text-xs uppercase tracking-wider transition-colors ${
+            pathname === '/suspects' ? 'text-accent' : 'text-muted'
           }`}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -42,7 +42,7 @@ export default function BottomNav() {
           </svg>
           <span>Suspects</span>
           {hydrated && (
-            <span className="rounded-full bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold text-accent">
+            <span className="rounded-sm bg-hot-pink/20 px-1.5 py-0.5 text-[10px] font-bold text-hot-pink">
               {progress.suspects}/8
             </span>
           )}

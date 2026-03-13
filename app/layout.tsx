@@ -12,7 +12,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#FCFCFB',
+  themeColor: '#000000',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,17 +20,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="scanlines">
         <Providers>
           <main className="mx-auto min-h-screen max-w-[375px] px-4 py-6">
             {children}
           </main>
           <BottomNav />
-          <footer className="fixed bottom-14 left-0 right-0 py-1 text-center text-[10px] tracking-widest text-secondary/50">
+          <footer className="fixed bottom-14 left-0 right-0 py-1 text-center font-[family-name:var(--font-terminal)] text-[10px] uppercase tracking-[3px] text-secondary/40">
             Klew Studio / Narrative Operations
           </footer>
         </Providers>

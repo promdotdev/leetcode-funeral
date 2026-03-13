@@ -15,35 +15,32 @@ export default function ClueCard({ clue }: { clue: Clue }) {
 
   return (
     <div
-      className={`rounded-lg border p-4 transition-all ${
+      className={`border-2 p-4 transition-all ${
         collected
-          ? 'border-accent/30 bg-accent/5 opacity-75'
-          : 'border-border bg-card'
+          ? 'border-accent/30 bg-accent/5 opacity-60'
+          : 'retro-window'
       }`}
     >
-      <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-secondary">
+      <div className="mb-1 font-[family-name:var(--font-terminal)] text-sm uppercase tracking-wider text-hot-pink">
         RE: {clue.aboutSuspectName}
       </div>
-      <div className="mb-3 text-xs font-medium text-accent">
-        {dimensionLabel[clue.dimension]}
+      <div className="mb-3 font-[family-name:var(--font-terminal)] text-xs uppercase tracking-widest text-accent">
+        [{dimensionLabel[clue.dimension]}]
       </div>
-      <p className="mb-4 text-sm leading-relaxed text-primary">
+      <p className="mb-4 text-sm leading-relaxed text-primary/70">
         {clue.evidence}
       </p>
       <div className="flex justify-end">
         {collected ? (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="2.5,7.5 5.5,10.5 11.5,4" />
-            </svg>
-            Collected
+          <span className="inline-flex items-center gap-1.5 font-[family-name:var(--font-terminal)] text-sm uppercase tracking-wider text-accent/60">
+            [COLLECTED]
           </span>
         ) : (
           <button
             onClick={() =>
               collectClue(clue.id, clue.aboutSuspectId, clue.dimension, clue.value)
             }
-            className="rounded-full bg-accent px-4 py-1.5 text-xs font-semibold text-white transition-transform active:scale-95"
+            className="retro-button text-sm"
           >
             Collect
           </button>

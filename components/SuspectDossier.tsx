@@ -25,19 +25,23 @@ export default function SuspectDossier({ id }: { id: string }) {
   return (
     <div>
       <div className="mb-6">
-        <div className="mb-1 text-xs font-medium uppercase tracking-wider text-accent">
+        <div className="mb-1 font-[family-name:var(--font-terminal)] text-xs uppercase tracking-[3px] text-hot-pink">
           Suspect Dossier
         </div>
-        <h1 className="text-2xl font-bold">{suspect.name}</h1>
-        <div className="mt-1 text-sm text-secondary">{suspect.title}</div>
-        <div className="mt-0.5 text-xs italic text-secondary">{suspect.role}</div>
+        <h1 className="neon-text text-3xl">{suspect.name}</h1>
+        <div className="mt-1 font-[family-name:var(--font-terminal)] text-sm uppercase tracking-wider text-secondary">
+          {suspect.title}
+        </div>
+        <div className="mt-0.5 text-xs italic text-muted">
+          {suspect.role}
+        </div>
       </div>
 
-      <p className="mb-6 text-sm leading-relaxed text-secondary">
+      <p className="mb-6 text-sm leading-relaxed text-primary/60">
         {suspect.bio}
       </p>
 
-      <h2 className="mb-3 text-lg font-semibold">Evidence</h2>
+      <h2 className="mb-3 text-lg text-accent">// Evidence</h2>
       <div className="space-y-3">
         {clues.map((clue) => (
           <ClueCard key={clue.id} clue={clue} />
