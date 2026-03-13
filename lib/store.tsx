@@ -13,6 +13,7 @@ interface GameState {
 
 interface GameStore {
   hydrated: boolean;
+  sessionId: string | null;
   collectedClues: string[];
   gridState: Record<string, boolean>;
   visitedSuspects: string[];
@@ -65,6 +66,7 @@ const GameContext = createContext<GameStore | null>(null);
 export function GameProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<GameState>(defaultState);
   const [hydrated, setHydrated] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const pendingVisits = useRef<string[]>([]);
   const isHydrated = useRef(false);
 
@@ -80,7 +82,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    getSessionId();
+    setSessionId(getSessionId());
     const loaded = loadState();
     let merged = loaded;
     for (const id of pendingVisits.current) {
@@ -166,6 +168,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
   const value: GameStore = {
     hydrated,
+    sessionId,
     collectedClues: state.collectedClues,
     gridState: state.gridState,
     visitedSuspects: state.visitedSuspects,

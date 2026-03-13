@@ -7,7 +7,7 @@ import { useGameState } from '@/lib/store';
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState<MysteryPlayer[]>([]);
   const [loading, setLoading] = useState(true);
-  const { playerName } = useGameState();
+  const { sessionId } = useGameState();
 
   const load = useCallback(async () => {
     const data = await fetchLeaderboard();
@@ -45,7 +45,7 @@ export default function LeaderboardPage() {
             </div>
 
             {players.map((player, i) => {
-              const isYou = player.name === playerName;
+              const isYou = player.session_id === sessionId;
               return (
                 <div
                   key={player.id}
