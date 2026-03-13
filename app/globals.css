@@ -13,6 +13,8 @@
   --color-glass-warn: #f59e0b;
   --color-glass-hot: #e11d8f;
 
+  --color-green: #52fc53;
+
   --color-primary: #000000;
   --color-secondary: #666666;
   --color-muted: #999999;
@@ -28,9 +30,20 @@ body {
   font-family: var(--font-body);
   font-size: 14px;
   color: var(--color-glass-text);
-  background: #1a1a1a;
+  background: #e5e5e5;
   min-height: 100vh;
   position: relative;
+}
+
+/* Checkerboard background */
+.checkerboard-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: #ffffff;
+  background-image:
+    conic-gradient(#e5e5e5 0.25turn, transparent 0.25turn, transparent 0.5turn, #e5e5e5 0.5turn, #e5e5e5 0.75turn, transparent 0.75turn);
+  background-size: 40px 40px;
 }
 
 h1, h2, h3 {
@@ -41,26 +54,20 @@ h1, h2, h3 {
 }
 
 main {
-  padding-bottom: 4.5rem;
+  padding-bottom: 5.5rem;
 }
 
-/* Card */
+/* Green card */
 .glass-card {
-  background: var(--color-glass-surface);
-  border: 1px solid var(--color-glass-border);
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  background: var(--color-green);
+  border: none;
+  border-radius: 12px;
   overflow: hidden;
 }
 
-/* Card header */
+/* Card header — hidden in new design, kept for structural compat */
 .glass-header {
-  background: linear-gradient(180deg, #ffffff 0%, #d8d8d8 100%);
-  border-bottom: 1px solid var(--color-glass-border);
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 .glass-header-text {
@@ -75,46 +82,31 @@ main {
 
 /* Badge pill */
 .glass-badge {
-  background: linear-gradient(180deg, #ffffff 0%, #d8d8d8 100%);
-  border: 1px solid var(--color-glass-border);
-  border-radius: 8px;
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.glass-badge-text {
-  font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--color-glass-text);
-  text-transform: uppercase;
+  display: none;
 }
 
 /* Card body */
 .glass-body {
   padding: 24px;
-  background: var(--color-glass-surface);
 }
 
-/* Inset panel */
+/* Inset panel (clue cards, inputs) */
 .glass-inset {
-  background: #f8f8f8;
-  border: 1px solid var(--color-glass-border);
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
   border-radius: 8px;
 }
 
 /* Green CTA */
 .glass-btn-primary {
-  background: linear-gradient(0deg, #52fc53 0%, #fffffc 100%);
+  background: #000000;
   border: none;
   border-radius: 2000px;
   padding: 18px 24px;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: var(--color-glass-text);
+  color: #ffffff;
   cursor: pointer;
   text-transform: uppercase;
   display: flex;
@@ -122,23 +114,22 @@ main {
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  box-shadow: inset -4px -4px 12px rgba(0, 0, 0, 0.25);
   transition: all 0.15s;
 }
 
 .glass-btn-primary:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.2);
 }
 
 .glass-btn-primary:active {
-  filter: brightness(0.95);
+  filter: brightness(0.8);
   transform: scale(0.98);
 }
 
 /* Secondary button */
 .glass-btn {
-  background: linear-gradient(180deg, #ffffff 0%, #d8d8d8 100%);
-  border: 1px solid var(--color-glass-border);
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 10px 20px;
   font-family: var(--font-mono);
@@ -155,10 +146,8 @@ main {
 
 /* Bottom nav */
 .glass-nav {
-  background: rgba(0, 0, 0, 0.83);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 4px 4px 0 0;
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
 }
 
 /* Checkbox */
@@ -166,8 +155,8 @@ main {
   display: inline-block;
   width: 14px;
   height: 14px;
-  border: 1px solid var(--color-glass-border);
-  background: var(--color-glass-surface);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 3px;
   vertical-align: middle;
   position: relative;
@@ -175,8 +164,8 @@ main {
 }
 
 .glass-check-checked {
-  background: var(--color-glass-accent);
-  border-color: #3eda3f;
+  background: #000000;
+  border-color: #000000;
 }
 
 .glass-check-checked::after {
@@ -192,8 +181,8 @@ main {
 
 /* Progress bar */
 .glass-progress {
-  background: #eeeeee;
-  border: 1px solid var(--color-glass-border);
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
   border-radius: 4px;
   height: 10px;
   overflow: hidden;
@@ -201,7 +190,7 @@ main {
 
 .glass-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #52fc53, #7dff7e);
+  background: var(--color-green);
   border-radius: 3px;
   transition: width 0.5s;
 }
@@ -212,4 +201,26 @@ main {
   font-weight: 400;
   text-transform: uppercase;
   color: var(--color-glass-muted);
+}
+
+/* White card variant (for grid, tables, lists) */
+.white-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* White card header */
+.white-card-header {
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--color-glass-text);
 }

@@ -31,16 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceMono.variable}`}>
-        {/* Full-screen floral background */}
-        <div
-          className="fixed inset-0 z-0"
-          style={{
-            backgroundImage: 'url(/bg-floral.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
+        <div className="checkerboard-bg" />
         <Providers>
           <main className="relative z-10 mx-auto min-h-screen max-w-[400px] px-6">
             {children}

@@ -14,7 +14,7 @@ export default function Grid() {
     <div>
       {/* Progress */}
       <div className="mb-4">
-        <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase text-white/60" style={{ fontFamily: 'var(--font-mono)' }}>
+        <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
           <span>Evidence: {progress.clues}/24</span>
           <span>{Math.round((progress.clues / 24) * 100)}%</span>
         </div>
@@ -34,21 +34,19 @@ export default function Grid() {
       )}
 
       {/* Grid */}
-      <div className="glass-card overflow-hidden">
-        <div className="glass-header">
-          <span className="glass-header-text">Deduction Matrix</span>
-        </div>
+      <div className="white-card">
+        <div className="white-card-header">Deduction Matrix</div>
         <div className="p-0">
           <table className="w-full border-collapse text-[11px]">
             <thead>
-              <tr className="bg-[#f0f0f0]">
-                <th className="border-b border-r border-glass-border p-2 text-left uppercase text-glass-muted" style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}>
+              <tr className="bg-[#f5f5f5]">
+                <th className="border-b border-r border-[#e0e0e0] p-2 text-left uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}>
                   Suspect
                 </th>
                 {DIMENSIONS.map((d) => (
                   <th
                     key={d}
-                    className="border-b border-r border-glass-border p-2 text-center uppercase text-glass-muted last:border-r-0"
+                    className="border-b border-r border-[#e0e0e0] p-2 text-center uppercase text-black/50 last:border-r-0"
                     style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}
                   >
                     {DIMENSION_LABELS[d]}
@@ -62,9 +60,9 @@ export default function Grid() {
                   key={suspect.id}
                   className={`${
                     i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
-                  } border-b border-glass-border last:border-b-0`}
+                  } border-b border-[#e0e0e0] last:border-b-0`}
                 >
-                  <td className="border-r border-glass-border p-2">
+                  <td className="border-r border-[#e0e0e0] p-2">
                     <Link
                       href={`/suspect/${suspect.id}`}
                       className="text-black underline decoration-black/20 hover:text-glass-hot"
@@ -84,7 +82,7 @@ export default function Grid() {
                     return (
                       <td
                         key={key}
-                        className={`border-r border-glass-border p-2 text-center last:border-r-0 ${textColor}`}
+                        className={`border-r border-[#e0e0e0] p-2 text-center last:border-r-0 ${textColor}`}
                       >
                         {cellText}
                       </td>

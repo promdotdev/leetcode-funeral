@@ -21,13 +21,11 @@ export default function UnlockHandler({ id }: { id: string }) {
       return;
     }
 
-    // Already unlocked — skip validation, go straight to dossier
     if (isSuspectUnlocked(id)) {
       router.replace(`/suspect/${id}`);
       return;
     }
 
-    // Validate the key from the NFC sticker URL
     if (key && validateUnlockKey(id, key)) {
       unlockSuspect(id);
       router.replace(`/suspect/${id}`);
@@ -42,15 +40,12 @@ export default function UnlockHandler({ id }: { id: string }) {
     return (
       <div className="pt-4">
         <div className="glass-card">
-          <div className="glass-header">
-            <span className="glass-header-text">Access Denied</span>
-          </div>
           <div className="glass-body text-center">
             <div className="text-[32px] mb-3">🚫</div>
             <h2 className="text-[14px] mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
-              Classified Dossier
+              Access Denied
             </h2>
-            <p className="text-[12px] text-glass-muted leading-[1.4]">
+            <p className="text-[12px] text-black/60 leading-[1.4]">
               This suspect&apos;s file requires physical clearance.
               Find and scan the NFC tag to unlock.
             </p>
@@ -61,7 +56,7 @@ export default function UnlockHandler({ id }: { id: string }) {
   }
 
   return (
-    <div className="pt-4 text-center text-white/60">
+    <div className="pt-4 text-center text-black/40">
       Verifying clearance...
     </div>
   );

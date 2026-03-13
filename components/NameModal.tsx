@@ -10,13 +10,11 @@ export default function NameModal() {
   if (!hydrated || playerName) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-6">
-      <div className="glass-card w-full max-w-[340px]">
-        <div className="glass-header">
-          <span className="glass-header-text">Identify Yourself</span>
-        </div>
-        <div className="glass-body space-y-4">
-          <p className="text-[12px] text-glass-muted">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-6">
+      <div className="white-card w-full max-w-[340px]">
+        <div className="white-card-header">Identify Yourself</div>
+        <div className="p-6 space-y-4">
+          <p className="text-[12px] text-black/50">
             Enter your name to join the investigation.
           </p>
           <input
@@ -31,7 +29,7 @@ export default function NameModal() {
             placeholder="Your name"
             maxLength={20}
             autoFocus
-            className="glass-inset w-full px-4 py-3 text-[13px] text-black outline-none placeholder:text-glass-muted/50"
+            className="w-full rounded-lg border border-[#e0e0e0] bg-[#f8f8f8] px-4 py-3 text-[13px] text-black outline-none placeholder:text-black/30 focus:border-green"
           />
           <div className="flex justify-end">
             <button

@@ -36,16 +36,14 @@ function SuspectStatus({ suspectId }: { suspectId: string }) {
 export default function SuspectsPage() {
   return (
     <div className="pt-4">
-      <div className="glass-card">
-        <div className="glass-header">
-          <span className="glass-header-text">Suspects — 8 Records</span>
-        </div>
+      <div className="white-card">
+        <div className="white-card-header">Suspects — 8 Records</div>
         <div className="p-0">
           {SUSPECTS.map((suspect, i) => (
             <Link
               key={suspect.id}
               href={`/suspect/${suspect.id}`}
-              className={`flex items-center gap-3 border-b border-glass-border px-4 py-3 transition-colors last:border-b-0 hover:bg-black/[0.02] ${
+              className={`flex items-center gap-3 border-b border-[#e0e0e0] px-4 py-3 transition-colors last:border-b-0 hover:bg-black/[0.02] ${
                 i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
               }`}
             >
@@ -53,7 +51,7 @@ export default function SuspectsPage() {
                 <div className="text-[13px] font-medium text-black">
                   {suspect.name}
                 </div>
-                <div className="truncate text-[11px] text-glass-muted">
+                <div className="truncate text-[11px] text-black/50">
                   {suspect.title}
                 </div>
               </div>

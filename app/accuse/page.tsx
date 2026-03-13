@@ -16,14 +16,11 @@ export default function AccusePage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center pt-4">
         <div className="glass-card w-full max-w-[340px]">
-          <div className="glass-header">
-            <span className="glass-header-text">Access Denied</span>
-          </div>
           <div className="glass-body text-center">
-            <p className="mb-2 text-[12px] text-glass-muted">
+            <p className="mb-2 text-[12px] text-black/60">
               Insufficient evidence archived.
             </p>
-            <p className="mb-4 text-[16px] font-bold text-glass-warn" style={{ fontFamily: 'var(--font-mono)' }}>
+            <p className="mb-4 text-[16px] font-bold text-black" style={{ fontFamily: 'var(--font-mono)' }}>
               {progress.clues}/24 clips found
             </p>
             <Link href="/grid" className="glass-btn text-[11px]">
@@ -39,13 +36,10 @@ export default function AccusePage() {
     return (
       <div className="pt-4">
         <div className="glass-card">
-          <div className="glass-header">
-            <span className="glass-header-text">Case Closed</span>
-          </div>
           <div className="glass-body space-y-3 text-[12px] leading-[1.4]">
-            <p className="text-[16px] font-bold text-glass-yes" style={{ fontFamily: 'var(--font-mono)' }}>CORRECT.</p>
+            <p className="text-[16px] font-bold text-black" style={{ fontFamily: 'var(--font-mono)' }}>CORRECT.</p>
             {REVEAL_TEXT.split('\n\n').map((para, i) => (
-              <p key={i}>{para}</p>
+              <p key={i} className="text-black/80">{para}</p>
             ))}
           </div>
         </div>
@@ -57,14 +51,11 @@ export default function AccusePage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center pt-4">
         <div className="glass-card w-full max-w-[340px]">
-          <div className="glass-header">
-            <span className="glass-header-text">Wrong</span>
-          </div>
           <div className="glass-body text-center">
             <p className="mb-1 text-[16px] font-bold text-glass-no" style={{ fontFamily: 'var(--font-mono)' }}>
               Incorrect.
             </p>
-            <p className="mb-4 text-[12px]">
+            <p className="mb-4 text-[12px] text-black/60">
               Review the matrix. Only one suspect has YES in all three columns.
             </p>
             <div className="flex justify-center gap-3">
@@ -87,11 +78,8 @@ export default function AccusePage() {
   return (
     <div className="pt-4">
       <div className="glass-card">
-        <div className="glass-header">
-          <span className="glass-header-text">Final Accusation</span>
-        </div>
         <div className="glass-body">
-          <p className="mb-4 text-[14px] font-bold text-glass-hot" style={{ fontFamily: 'var(--font-mono)' }}>
+          <p className="mb-4 text-[14px] font-bold text-black" style={{ fontFamily: 'var(--font-mono)' }}>
             Who killed Lee T. Code?
           </p>
 
@@ -102,8 +90,8 @@ export default function AccusePage() {
                 onClick={() => setSelected(suspect.id)}
                 className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[13px] transition-colors ${
                   selected === suspect.id
-                    ? 'bg-glass-accent/20 text-black'
-                    : 'text-black hover:bg-black/[0.02]'
+                    ? 'bg-black/10 text-black'
+                    : 'text-black/80 hover:bg-black/5'
                 }`}
               >
                 <span className={`glass-check ${selected === suspect.id ? 'glass-check-checked' : ''}`} />

@@ -19,7 +19,6 @@ export default function SuspectDossier({ id }: { id: string }) {
       router.replace('/suspects');
       return;
     }
-    // Only mark visited when the suspect is unlocked
     if (unlocked) {
       markVisited(id);
     }
@@ -29,29 +28,30 @@ export default function SuspectDossier({ id }: { id: string }) {
 
   return (
     <div className="pt-4">
+      {/* Dossier header card */}
       <div className="glass-card mb-4">
-        <div className="glass-header">
-          <span className="glass-header-text">Dossier — {suspect.id.toUpperCase()}</span>
-        </div>
         <div className="glass-body">
+          <div className="text-[10px] uppercase tracking-wider text-black/50 mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
+            Dossier — {suspect.id.toUpperCase()}
+          </div>
           <h1 className="text-[16px]" style={{ fontFamily: 'var(--font-mono)' }}>{suspect.name}</h1>
-          <div className="mt-1 text-[12px] text-glass-muted">
+          <div className="mt-1 text-[12px] text-black/60">
             {suspect.title}
           </div>
-          <div className="mt-0.5 text-[11px] italic text-glass-muted">
+          <div className="mt-0.5 text-[11px] italic text-black/50">
             {suspect.role}
           </div>
 
           {unlocked ? (
-            <p className="mt-3 text-[12px] leading-[1.4] text-black/70">
+            <p className="mt-3 text-[12px] leading-[1.4] text-black/80">
               {suspect.bio}
             </p>
           ) : (
-            <div className="mt-3 rounded-lg bg-[#f8f8f8] border border-glass-border p-3">
-              <p className="text-[12px] text-glass-muted text-center" style={{ fontFamily: 'var(--font-mono)' }}>
+            <div className="mt-3 rounded-lg bg-black/5 p-3">
+              <p className="text-[12px] text-black/50 text-center" style={{ fontFamily: 'var(--font-mono)' }}>
                 [ CLASSIFIED ]
               </p>
-              <p className="mt-2 text-[11px] text-glass-muted text-center">
+              <p className="mt-2 text-[11px] text-black/40 text-center">
                 Scan the NFC tag to access this dossier
               </p>
             </div>
@@ -61,7 +61,7 @@ export default function SuspectDossier({ id }: { id: string }) {
 
       {unlocked ? (
         <>
-          <div className="glass-label mb-3 text-white/60">
+          <div className="mb-3 text-[11px] uppercase tracking-wider text-black/40" style={{ fontFamily: 'var(--font-mono)' }}>
             Archived Evidence — {clues.length} clips
           </div>
           <div className="space-y-3">
@@ -74,10 +74,10 @@ export default function SuspectDossier({ id }: { id: string }) {
         <div className="glass-card">
           <div className="glass-body text-center">
             <div className="text-[24px] mb-2">🔒</div>
-            <p className="text-[12px] text-glass-muted" style={{ fontFamily: 'var(--font-mono)' }}>
+            <p className="text-[12px] text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
               {clues.length} evidence clips locked
             </p>
-            <p className="mt-1 text-[11px] text-glass-muted">
+            <p className="mt-1 text-[11px] text-black/40">
               Find this suspect&apos;s NFC sticker to unlock
             </p>
           </div>
