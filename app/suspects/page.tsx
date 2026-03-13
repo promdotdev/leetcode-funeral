@@ -8,14 +8,10 @@ export default function SuspectsPage() {
   const { visitedSuspects, hydrated } = useGameState();
 
   return (
-    <div className="pt-3">
-      <div className="db-window">
-        <div className="db-titlebar">
-          <span className="db-titlebar-text">Suspects - [8 Records]</span>
-          <div className="db-titlebar-buttons">
-            <span className="db-titlebar-btn">–</span>
-            <span className="db-titlebar-btn db-titlebar-btn-close">×</span>
-          </div>
+    <div className="pt-4">
+      <div className="glass-card">
+        <div className="glass-header">
+          <span className="glass-header-text">Suspects — 8 Records</span>
         </div>
         <div className="p-0">
           {SUSPECTS.map((suspect, i) => {
@@ -24,22 +20,22 @@ export default function SuspectsPage() {
               <Link
                 key={suspect.id}
                 href={`/suspect/${suspect.id}`}
-                className={`flex items-center gap-2 border-b border-terminal-border/40 px-3 py-2 transition-colors last:border-b-0 hover:bg-terminal-glow/5 ${
-                  i % 2 === 0 ? 'bg-terminal-panel' : 'bg-terminal-dark'
+                className={`flex items-center gap-3 border-b border-glass-border px-4 py-3 transition-colors last:border-b-0 hover:bg-black/[0.02] ${
+                  i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
                 }`}
               >
-                <span className={`db-checkbox ${visited ? 'db-checkbox-checked' : ''}`} />
+                <span className={`glass-check ${visited ? 'glass-check-checked' : ''}`} />
                 <div className="min-w-0 flex-1">
-                  <div className={`text-[11px] font-bold ${visited ? 'text-terminal-glow' : 'text-terminal-text'}`}>
+                  <div className={`text-[13px] font-medium ${visited ? 'text-glass-yes' : 'text-black'}`}>
                     {suspect.name}
                   </div>
-                  <div className="truncate text-[10px] text-terminal-text-dim">
+                  <div className="truncate text-[11px] text-glass-muted">
                     {suspect.title}
                   </div>
                 </div>
                 {visited && (
-                  <span className="text-[9px] uppercase tracking-wider text-terminal-glow/50">
-                    Accessed
+                  <span className="glass-label text-[10px] text-glass-yes">
+                    Visited
                   </span>
                 )}
               </Link>

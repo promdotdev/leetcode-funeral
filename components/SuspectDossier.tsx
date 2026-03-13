@@ -23,33 +23,29 @@ export default function SuspectDossier({ id }: { id: string }) {
   if (!suspect) return null;
 
   return (
-    <div>
-      <div className="db-window mb-3">
-        <div className="db-titlebar">
-          <span className="db-titlebar-text">Dossier - [{suspect.id.toUpperCase()}]</span>
-          <div className="db-titlebar-buttons">
-            <span className="db-titlebar-btn">–</span>
-            <span className="db-titlebar-btn db-titlebar-btn-close">×</span>
-          </div>
+    <div className="pt-4">
+      <div className="glass-card mb-4">
+        <div className="glass-header">
+          <span className="glass-header-text">Dossier — {suspect.id.toUpperCase()}</span>
         </div>
-        <div className="db-window-body">
-          <h1 className="text-[14px] font-bold text-terminal-glow glow-text">{suspect.name}</h1>
-          <div className="text-[11px] text-terminal-text">
+        <div className="glass-body">
+          <h1 className="text-[16px]" style={{ fontFamily: 'var(--font-mono)' }}>{suspect.name}</h1>
+          <div className="mt-1 text-[12px] text-glass-muted">
             {suspect.title}
           </div>
-          <div className="mt-0.5 text-[10px] italic text-terminal-text-dim">
+          <div className="mt-0.5 text-[11px] italic text-glass-muted">
             {suspect.role}
           </div>
-          <p className="mt-3 text-[11px] leading-relaxed text-terminal-text/80">
+          <p className="mt-3 text-[12px] leading-[1.4] text-black/70">
             {suspect.bio}
           </p>
         </div>
       </div>
 
-      <div className="mb-2 text-[10px] font-bold uppercase tracking-widest text-terminal-text-dim">
+      <div className="glass-label mb-3 text-white/60">
         Archived Evidence — {clues.length} clips
       </div>
-      <div className="space-y-2">
+      <div className="space-y-3">
         {clues.map((clue) => (
           <ClueCard key={clue.id} clue={clue} />
         ))}
