@@ -13,48 +13,43 @@ export default function Grid() {
   return (
     <div>
       {/* Progress */}
-      <div className="mb-3">
-        <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wider text-terminal-text-dim">
+      <div className="mb-4">
+        <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase text-white/60" style={{ fontFamily: 'var(--font-mono)' }}>
           <span>Evidence: {progress.clues}/24</span>
           <span>{Math.round((progress.clues / 24) * 100)}%</span>
         </div>
-        <div className="db-progress">
+        <div className="glass-progress">
           <div
-            className="db-progress-fill"
+            className="glass-progress-fill"
             style={{ width: hydrated ? `${(progress.clues / 24) * 100}%` : '0%' }}
           />
         </div>
       </div>
 
       {isComplete && (
-        <Link
-          href="/accuse"
-          className="db-button db-button-primary mb-3 block text-center text-[11px]"
-        >
-          &gt; Submit Final Accusation
+        <Link href="/accuse" className="glass-btn-primary mb-4 w-full">
+          <span>Submit Final Accusation</span>
+          <span>▶</span>
         </Link>
       )}
 
       {/* Grid */}
-      <div className="db-window overflow-hidden">
-        <div className="db-titlebar">
-          <span className="db-titlebar-text">CornerStone - [Deduction Matrix]</span>
-          <div className="db-titlebar-buttons">
-            <span className="db-titlebar-btn">–</span>
-            <span className="db-titlebar-btn db-titlebar-btn-close">×</span>
-          </div>
+      <div className="glass-card overflow-hidden">
+        <div className="glass-header">
+          <span className="glass-header-text">Deduction Matrix</span>
         </div>
         <div className="p-0">
-          <table className="w-full border-collapse text-[10px]">
+          <table className="w-full border-collapse text-[11px]">
             <thead>
-              <tr className="bg-terminal-panel-light">
-                <th className="border-b border-r border-terminal-border p-1.5 text-left font-bold uppercase tracking-wider text-terminal-glow">
+              <tr className="bg-[#f0f0f0]">
+                <th className="border-b border-r border-glass-border p-2 text-left uppercase text-glass-muted" style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}>
                   Suspect
                 </th>
                 {DIMENSIONS.map((d) => (
                   <th
                     key={d}
-                    className="border-b border-r border-terminal-border p-1.5 text-center font-bold uppercase tracking-wider text-terminal-glow last:border-r-0"
+                    className="border-b border-r border-glass-border p-2 text-center uppercase text-glass-muted last:border-r-0"
+                    style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}
                   >
                     {DIMENSION_LABELS[d]}
                   </th>
@@ -66,13 +61,13 @@ export default function Grid() {
                 <tr
                   key={suspect.id}
                   className={`${
-                    i % 2 === 0 ? 'bg-terminal-panel' : 'bg-terminal-dark'
-                  } border-b border-terminal-border/50 last:border-b-0`}
+                    i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
+                  } border-b border-glass-border last:border-b-0`}
                 >
-                  <td className="border-r border-terminal-border/50 p-1.5">
+                  <td className="border-r border-glass-border p-2">
                     <Link
                       href={`/suspect/${suspect.id}`}
-                      className="text-terminal-accent underline decoration-terminal-accent/30 hover:text-terminal-glow"
+                      className="text-black underline decoration-black/20 hover:text-glass-hot"
                     >
                       {suspect.name}
                     </Link>
@@ -83,13 +78,13 @@ export default function Grid() {
                     let cellText = '';
                     let textColor = '';
                     if (hydrated && val !== undefined) {
-                      textColor = val ? 'text-terminal-yes glow-text' : 'text-terminal-no glow-hot';
+                      textColor = val ? 'text-glass-yes font-bold' : 'text-glass-no font-bold';
                       cellText = val ? 'YES' : 'NO';
                     }
                     return (
                       <td
                         key={key}
-                        className={`border-r border-terminal-border/50 p-1.5 text-center font-bold last:border-r-0 ${textColor}`}
+                        className={`border-r border-glass-border p-2 text-center last:border-r-0 ${textColor}`}
                       >
                         {cellText}
                       </td>

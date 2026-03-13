@@ -14,27 +14,27 @@ export default function ClueCard({ clue }: { clue: Clue }) {
   const collected = hydrated && isClueCollected(clue.id);
 
   return (
-    <div className={`db-inset p-3 ${collected ? 'opacity-50' : ''}`}>
-      <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-terminal-hot glow-hot">
+    <div className={`glass-inset p-4 ${collected ? 'opacity-40' : ''}`}>
+      <div className="mb-1 text-[12px] font-bold uppercase text-glass-hot" style={{ fontFamily: 'var(--font-mono)' }}>
         RE: {clue.aboutSuspectName}
       </div>
-      <div className="mb-2 text-[9px] font-bold uppercase tracking-widest text-terminal-text-dim">
+      <div className="glass-label mb-2 text-[10px]">
         [{dimensionLabel[clue.dimension]}]
       </div>
-      <p className="mb-3 text-[11px] leading-relaxed text-terminal-text">
+      <p className="mb-4 text-[12px] leading-[1.4]">
         {clue.evidence}
       </p>
       <div className="flex justify-end">
         {collected ? (
-          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-terminal-glow glow-text">
-            [Archived]
+          <span className="glass-label text-glass-yes">
+            ✓ Archived
           </span>
         ) : (
           <button
             onClick={() =>
               collectClue(clue.id, clue.aboutSuspectId, clue.dimension, clue.value)
             }
-            className="db-button db-button-primary text-[10px]"
+            className="glass-btn text-[11px]"
           >
             Add to Session
           </button>

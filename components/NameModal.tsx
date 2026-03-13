@@ -10,20 +10,14 @@ export default function NameModal() {
   if (!hydrated || playerName) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 px-6">
-      <div className="db-window w-full max-w-[340px]">
-        <div className="db-titlebar">
-          <span className="db-titlebar-text">Auth_Guest</span>
-          <div className="db-titlebar-buttons">
-            <span className="db-titlebar-btn db-titlebar-btn-close">×</span>
-          </div>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-6">
+      <div className="glass-card w-full max-w-[340px]">
+        <div className="glass-header">
+          <span className="glass-header-text">Identify Yourself</span>
         </div>
-        <div className="db-window-body space-y-3">
-          <p className="text-[11px] text-terminal-text-dim">
-            You are logged in. <span className="text-terminal-glow">AUTH_GUEST</span>
-          </p>
-          <p className="text-[11px] text-secondary">
-            Enter query name to access archived evidence.
+        <div className="glass-body space-y-4">
+          <p className="text-[12px] text-glass-muted">
+            Enter your name to join the investigation.
           </p>
           <input
             type="text"
@@ -34,20 +28,20 @@ export default function NameModal() {
                 setPlayerName(input.trim());
               }
             }}
-            placeholder="name_"
+            placeholder="Your name"
             maxLength={20}
             autoFocus
-            className="db-inset w-full px-2 py-1.5 text-[12px] text-terminal-glow caret-terminal-glow outline-none placeholder:text-terminal-text-dim/50"
+            className="glass-inset w-full px-4 py-3 text-[13px] text-black outline-none placeholder:text-glass-muted/50"
           />
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end">
             <button
               onClick={() => {
                 if (input.trim()) setPlayerName(input.trim());
               }}
               disabled={!input.trim()}
-              className="db-button db-button-primary disabled:opacity-30"
+              className="glass-btn disabled:opacity-30"
             >
-              Search
+              Enter
             </button>
           </div>
         </div>

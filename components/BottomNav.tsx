@@ -15,21 +15,22 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="db-taskbar fixed bottom-0 left-0 right-0 z-50">
-      <div className="mx-auto flex max-w-[375px] items-stretch">
+    <nav className="glass-nav fixed bottom-0 left-0 right-0 z-50">
+      <div className="mx-auto flex max-w-[400px] items-stretch justify-center gap-[18px] px-8">
         {tabs.map((tab) => (
           <Link
             key={tab.href}
             href={tab.href}
-            className={`flex flex-1 items-center justify-center gap-1.5 py-2 text-[10px] font-bold uppercase tracking-wider transition-colors ${
+            className={`flex flex-col items-center justify-center gap-[10px] py-3 text-[12px] uppercase transition-colors ${
               pathname === tab.href
-                ? 'bg-terminal-glow/10 text-terminal-glow glow-text'
-                : 'text-terminal-text-dim hover:bg-terminal-glow/5 hover:text-terminal-text'
+                ? 'text-glass-accent'
+                : 'text-white/70 hover:text-white'
             }`}
+            style={{ fontFamily: 'var(--font-mono)', width: 72 }}
           >
             <span>{tab.label}</span>
             {tab.badge && (
-              <span className="rounded-sm bg-terminal-glow/15 px-1 py-0.5 text-[9px]">
+              <span className="text-[10px] text-white/50">
                 {tab.badge}
               </span>
             )}
