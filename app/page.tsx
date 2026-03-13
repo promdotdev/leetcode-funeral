@@ -11,14 +11,20 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-[80vh] flex-col justify-between">
-      <div>
-        <h1 className="neon-text mb-6 text-4xl font-bold leading-tight">
-          LeetCode is Dead.
-        </h1>
-
-        <div className="space-y-4 text-sm leading-relaxed text-primary/60">
-          <p>
+    <div className="space-y-3 pt-3">
+      <div className="db-window">
+        <div className="db-titlebar">
+          <span className="db-titlebar-text">CornerStone - [DB344-A]</span>
+          <div className="db-titlebar-buttons">
+            <span className="db-titlebar-btn">–</span>
+            <span className="db-titlebar-btn db-titlebar-btn-close">×</span>
+          </div>
+        </div>
+        <div className="db-window-body space-y-3 text-[11px] leading-relaxed">
+          <p className="text-[13px] font-bold text-terminal-glow glow-text">
+            CASE FILE: Lee T. Code — DECEASED
+          </p>
+          <p className="text-terminal-text">
             Lee T. Code is dead. Founder of CodeScreen, the technical hiring
             platform that became the gatekeeping ritual of software engineering.
             Poisoned at the CodeScreen Enterprise launch event. He picked up a
@@ -26,21 +32,27 @@ export default function Home() {
             rest. The platform was destroyed from the inside at the same moment.
             Eight suspects were at the launch. One of them did it.
           </p>
-
-          <p className="font-[family-name:var(--font-terminal)] text-base uppercase tracking-wider text-hot-pink">
+          <p className="font-bold text-terminal-hot glow-hot">
             The killer is the only suspect who had all three: the motive, the
             means, and the opportunity.
           </p>
         </div>
+      </div>
 
-        <div className="mt-8">
-          <h2 className="mb-3 text-xl text-accent">// How to play</h2>
-          <ol className="list-inside list-decimal space-y-2 font-[family-name:var(--font-terminal)] text-base leading-relaxed text-primary/50">
+      <div className="db-window">
+        <div className="db-titlebar">
+          <span className="db-titlebar-text">ReadMe.txt</span>
+          <div className="db-titlebar-buttons">
+            <span className="db-titlebar-btn db-titlebar-btn-close">×</span>
+          </div>
+        </div>
+        <div className="db-window-body">
+          <ol className="list-inside list-decimal space-y-1.5 text-[11px] leading-relaxed text-terminal-text">
             <li>Find the 8 tagged items around the party</li>
             <li>Tap each one to open a suspect&apos;s dossier</li>
             <li>
-              Each dossier contains 3 clues. Tap &ldquo;Collect&rdquo; to add
-              them to your grid
+              Each dossier contains 3 clues. Tap &ldquo;Add to Session&rdquo; to
+              archive them to your grid
             </li>
             <li>Use your grid to eliminate suspects</li>
             <li>
@@ -52,9 +64,9 @@ export default function Home() {
 
       <Link
         href="/grid"
-        className="retro-button mt-10 block text-center"
+        className="db-button db-button-primary block text-center text-[11px]"
       >
-        &gt; Start investigating
+        &gt; Begin Investigation_
       </Link>
     </div>
   );

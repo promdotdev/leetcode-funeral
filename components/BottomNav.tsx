@@ -8,45 +8,33 @@ export default function BottomNav() {
   const pathname = usePathname();
   const { progress, hydrated } = useGameState();
 
+  const tabs = [
+    { href: '/grid', label: 'Grid', badge: hydrated ? `${progress.clues}/24` : null },
+    { href: '/leaderboard', label: 'Live', badge: null },
+    { href: '/suspects', label: 'Suspects', badge: hydrated ? `${progress.suspects}/8` : null },
+  ];
+
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-accent/30 bg-black/95 backdrop-blur-sm">
+    <nav className="db-taskbar fixed bottom-0 left-0 right-0 z-50">
       <div className="mx-auto flex max-w-[375px] items-stretch">
-        <Link
-          href="/grid"
-          className={`flex flex-1 flex-col items-center gap-0.5 py-3 font-[family-name:var(--font-terminal)] text-xs uppercase tracking-wider transition-colors ${
-            pathname === '/grid' ? 'text-accent' : 'text-muted'
-          }`}
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <rect x="2" y="2" width="6" height="6" rx="1" />
-            <rect x="12" y="2" width="6" height="6" rx="1" />
-            <rect x="2" y="12" width="6" height="6" rx="1" />
-            <rect x="12" y="12" width="6" height="6" rx="1" />
-          </svg>
-          <span>Grid</span>
-          {hydrated && (
-            <span className="rounded-sm bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold text-accent">
-              {progress.clues}/24
-            </span>
-          )}
-        </Link>
-        <Link
-          href="/suspects"
-          className={`flex flex-1 flex-col items-center gap-0.5 py-3 font-[family-name:var(--font-terminal)] text-xs uppercase tracking-wider transition-colors ${
-            pathname === '/suspects' ? 'text-accent' : 'text-muted'
-          }`}
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="10" cy="7" r="4" />
-            <path d="M3 18c0-3.5 3.1-6 7-6s7 2.5 7 6" />
-          </svg>
-          <span>Suspects</span>
-          {hydrated && (
-            <span className="rounded-sm bg-hot-pink/20 px-1.5 py-0.5 text-[10px] font-bold text-hot-pink">
-              {progress.suspects}/8
-            </span>
-          )}
-        </Link>
+        {tabs.map((tab) => (
+          <Link
+            key={tab.href}
+            href={tab.href}
+            className={`flex flex-1 items-center justify-center gap-1.5 py-2 text-[10px] font-bold uppercase tracking-wider transition-colors ${
+              pathname === tab.href
+                ? 'bg-terminal-glow/10 text-terminal-glow glow-text'
+                : 'text-terminal-text-dim hover:bg-terminal-glow/5 hover:text-terminal-text'
+            }`}
+          >
+            <span>{tab.label}</span>
+            {tab.badge && (
+              <span className="rounded-sm bg-terminal-glow/15 px-1 py-0.5 text-[9px]">
+                {tab.badge}
+              </span>
+            )}
+          </Link>
+        ))}
       </div>
     </nav>
   );
