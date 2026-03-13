@@ -7,6 +7,7 @@ interface GameState {
   collectedClues: string[];
   gridState: Record<string, boolean>;
   visitedSuspects: string[];
+  unlockedSuspects: string[];
   playerName: string | null;
   solved: boolean;
 }
@@ -16,9 +17,12 @@ interface GameStore {
   collectedClues: string[];
   gridState: Record<string, boolean>;
   visitedSuspects: string[];
+  unlockedSuspects: string[];
   playerName: string | null;
   collectClue: (clueId: string, aboutSuspectId: string, dimension: string, value: boolean) => void;
   markVisited: (suspectId: string) => void;
+  unlockSuspect: (suspectId: string) => void;
+  isSuspectUnlocked: (suspectId: string) => boolean;
   setPlayerName: (name: string) => void;
   markSolved: () => void;
   isClueCollected: (clueId: string) => boolean;
@@ -32,6 +36,7 @@ const defaultState: GameState = {
   collectedClues: [],
   gridState: {},
   visitedSuspects: [],
+  unlockedSuspects: [],
   playerName: null,
   solved: false,
 };
@@ -134,6 +139,23 @@ export function GameProvider({ children }: { children: ReactNode }) {
     });
   }, [syncToSupabase]);
 
+  const unlockSuspect = useCallback((suspectId: string) => {
+    setState((prev) => {
+      if (prev.unlockedSuspects.includes(suspectId)) return prev;
+      const next: GameState = {
+        ...prev,
+        unlockedSuspects: [...prev.unlockedSuspects, suspectId],
+      };
+      saveState(next);
+      return next;
+    });
+  }, []);
+
+  const isSuspectUnlocked = useCallback(
+    (suspectId: string) => state.unlockedSuspects.includes(suspectId),
+    [state.unlockedSuspects]
+  );
+
   const setPlayerName = useCallback((name: string) => {
     const sessionId = getSessionId();
     setState((prev) => {
@@ -169,9 +191,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
     collectedClues: state.collectedClues,
     gridState: state.gridState,
     visitedSuspects: state.visitedSuspects,
+    unlockedSuspects: state.unlockedSuspects,
     playerName: state.playerName,
     collectClue,
     markVisited,
+    unlockSuspect,
+    isSuspectUnlocked,
     setPlayerName,
     markSolved,
     isClueCollected,
