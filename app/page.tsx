@@ -12,20 +12,27 @@ export default function Home() {
 
   return (
     <>
-      {/* Full-bleed hero splash */}
-      <div className="-mx-6 -mt-0 mb-4 flex items-center justify-center overflow-hidden" style={{ height: '85vh' }}>
+      {/* Full-screen hero — breaks out of the layout container */}
+      <div
+        className="fixed inset-0 z-[1] flex items-center justify-center bg-white"
+        style={{ bottom: '4rem' }}
+      >
         <Image
           src="/hero.png"
           alt="Chrome detective"
           width={574}
           height={1400}
-          className="h-full w-auto object-cover"
+          className="h-full w-auto max-w-none object-cover"
           priority
         />
       </div>
 
-      <div className="flex flex-col gap-4">
-        {/* Chrome globe icon */}
+      {/* Spacer so content starts below the hero fold */}
+      <div style={{ height: 'calc(100vh - 4rem)' }} />
+
+      {/* Scrollable content below the hero */}
+      <div className="relative z-[2] flex flex-col gap-4 pb-8">
+        {/* Globe icon */}
         <div className="flex justify-end">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="opacity-80">
             <circle cx="24" cy="24" r="20" stroke="#555" strokeWidth="1.5" fill="none" />
