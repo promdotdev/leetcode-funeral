@@ -1,11 +1,23 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react';
 
 interface GameState {
   collectedClues: string[];
   gridState: Record<string, boolean>;
   visitedSuspects: string[];
+}
+
+interface GameStore {
+  hydrated: boolean;
+  collectedClues: string[];
+  gridState: Record<string, boolean>;
+  visitedSuspects: string[];
+  collectClue: (clueId: string, aboutSuspectId: string, dimension: string, value: boolean) => void;
+  markVisited: (suspectId: string) => void;
+  isClueCollected: (clueId: string) => boolean;
+  isComplete: boolean;
+  progress: { clues: number; suspects: number };
 }
 
 const STORAGE_KEY = 'murder-mystery-state';
@@ -28,11 +40,9 @@ function loadState(): GameState {
 }
 
 function saveState(state: GameState) {
-  if (typeof window === 'undefined') return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-// Ensure a session ID exists
 function ensureSession() {
   if (typeof window === 'undefined') return;
   if (!localStorage.getItem('sessionId')) {
@@ -40,19 +50,19 @@ function ensureSession() {
   }
 }
 
-export function useGameState() {
-  const [state, setState] = useState<GameState>(defaultState);
+const GameContext = createContext<GameStore | null>(null);
+
+export function GameProvider({ children }: { children: ReactNode }) {
+  // Use lazy initializer so state is correct from the very first client render.
+  // On the server this returns defaultState; on the client it reads localStorage.
+  const [state, setState] = useState<GameState>(() => loadState());
   const [hydrated, setHydrated] = useState(false);
+  const hydratedRef = useRef(false);
 
   useEffect(() => {
     ensureSession();
-    setState(loadState());
+    hydratedRef.current = true;
     setHydrated(true);
-  }, []);
-
-  const persist = useCallback((next: GameState) => {
-    setState(next);
-    saveState(next);
   }, []);
 
   const collectClue = useCallback(
@@ -91,7 +101,7 @@ export function useGameState() {
     [state.collectedClues]
   );
 
-  return {
+  const value: GameStore = {
     hydrated,
     collectedClues: state.collectedClues,
     gridState: state.gridState,
@@ -105,4 +115,12 @@ export function useGameState() {
       suspects: state.visitedSuspects.length,
     },
   };
+
+  return <GameContext value={value}>{children}</GameContext>;
+}
+
+export function useGameState(): GameStore {
+  const ctx = useContext(GameContext);
+  if (!ctx) throw new Error('useGameState must be used within a GameProvider');
+  return ctx;
 }

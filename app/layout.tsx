@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import Providers from '@/components/Providers';
 import BottomNav from '@/components/BottomNav';
 
 export const metadata: Metadata = {
@@ -24,13 +25,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <main className="mx-auto min-h-screen max-w-[375px] px-4 py-6">
-          {children}
-        </main>
-        <BottomNav />
-        <footer className="fixed bottom-14 left-0 right-0 py-1 text-center text-[10px] tracking-widest text-secondary/50">
-          Klew Studio / Narrative Operations
-        </footer>
+        <Providers>
+          <main className="mx-auto min-h-screen max-w-[375px] px-4 py-6">
+            {children}
+          </main>
+          <BottomNav />
+          <footer className="fixed bottom-14 left-0 right-0 py-1 text-center text-[10px] tracking-widest text-secondary/50">
+            Klew Studio / Narrative Operations
+          </footer>
+        </Providers>
       </body>
     </html>
   );
