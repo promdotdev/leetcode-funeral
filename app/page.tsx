@@ -34,13 +34,13 @@ export default function Home() {
       <div className="relative z-[2] flex flex-col gap-4 pb-8">
         {/* Globe icon */}
         <div className="flex justify-end">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="opacity-80">
-            <circle cx="24" cy="24" r="20" stroke="#555" strokeWidth="1.5" fill="none" />
-            <ellipse cx="24" cy="24" rx="10" ry="20" stroke="#555" strokeWidth="1.5" fill="none" />
-            <line x1="4" y1="24" x2="44" y2="24" stroke="#555" strokeWidth="1.5" />
-            <line x1="24" y1="4" x2="24" y2="44" stroke="#555" strokeWidth="1.5" />
-            <ellipse cx="24" cy="24" rx="20" ry="8" stroke="#555" strokeWidth="1" fill="none" />
-          </svg>
+          <Image
+            src="/globe.png"
+            alt=""
+            width={48}
+            height={48}
+            className="opacity-80"
+          />
         </div>
 
         {/* Case narrative */}
@@ -82,13 +82,20 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Casket */}
-        <div className="flex justify-center py-2">
+        {/* Roses + Casket */}
+        <div className="relative flex justify-center py-2">
+          <Image
+            src="/roses.png"
+            alt="Pink roses"
+            width={140}
+            height={80}
+            className="absolute -left-2 bottom-0 h-auto w-28 object-contain"
+          />
           <Image
             src="/casket.png"
-            alt="Casket with roses"
+            alt="Casket"
             width={280}
-            height={130}
+            height={180}
             className="h-auto w-56 object-contain"
           />
         </div>
