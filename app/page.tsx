@@ -12,17 +12,14 @@ export default function Home() {
 
   return (
     <>
-      {/* Full-screen hero — breaks out of the layout container */}
-      <div
-        className="fixed inset-0 z-[1] flex items-center justify-center bg-white"
-        style={{ bottom: '4rem' }}
-      >
+      {/* Full-screen hero — edge to edge, checkerboard behind transparent areas */}
+      <div className="fixed inset-0 z-[1]" style={{ bottom: '4rem' }}>
+        <div className="checkerboard-bg !fixed" style={{ bottom: '4rem' }} />
         <Image
           src="/hero.png"
           alt="Chrome detective"
-          width={574}
-          height={1400}
-          className="h-full w-auto max-w-none object-cover"
+          fill
+          className="object-cover object-top"
           priority
         />
       </div>
