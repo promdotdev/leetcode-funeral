@@ -29,7 +29,6 @@ const defaultState: GameState = {
 };
 
 function loadState(): GameState {
-  if (typeof window === 'undefined') return defaultState;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState;
@@ -43,25 +42,31 @@ function saveState(state: GameState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-function ensureSession() {
-  if (typeof window === 'undefined') return;
-  if (!localStorage.getItem('sessionId')) {
-    localStorage.setItem('sessionId', crypto.randomUUID());
-  }
-}
-
 const GameContext = createContext<GameStore | null>(null);
 
 export function GameProvider({ children }: { children: ReactNode }) {
-  // Use lazy initializer so state is correct from the very first client render.
-  // On the server this returns defaultState; on the client it reads localStorage.
-  const [state, setState] = useState<GameState>(() => loadState());
+  const [state, setState] = useState<GameState>(defaultState);
   const [hydrated, setHydrated] = useState(false);
-  const hydratedRef = useRef(false);
+  // Queue mutations that arrive before hydration (e.g. markVisited in useEffect)
+  const pendingVisits = useRef<string[]>([]);
+  const isHydrated = useRef(false);
 
   useEffect(() => {
-    ensureSession();
-    hydratedRef.current = true;
+    if (!localStorage.getItem('sessionId')) {
+      localStorage.setItem('sessionId', crypto.randomUUID());
+    }
+    const loaded = loadState();
+    // Apply any visits that were queued before hydration
+    let merged = loaded;
+    for (const id of pendingVisits.current) {
+      if (!merged.visitedSuspects.includes(id)) {
+        merged = { ...merged, visitedSuspects: [...merged.visitedSuspects, id] };
+      }
+    }
+    pendingVisits.current = [];
+    if (merged !== loaded) saveState(merged);
+    setState(merged);
+    isHydrated.current = true;
     setHydrated(true);
   }, []);
 
@@ -85,6 +90,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
   );
 
   const markVisited = useCallback((suspectId: string) => {
+    if (!isHydrated.current) {
+      // Queue it — will be merged when hydration completes
+      if (!pendingVisits.current.includes(suspectId)) {
+        pendingVisits.current.push(suspectId);
+      }
+      return;
+    }
     setState((prev) => {
       if (prev.visitedSuspects.includes(suspectId)) return prev;
       const next: GameState = {
