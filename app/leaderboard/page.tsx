@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { fetchLeaderboard, type MysteryPlayer } from '@/lib/supabase';
 import { useGameState } from '@/lib/store';
+import CardDecorations from '@/components/CardDecorations';
 
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState<MysteryPlayer[]>([]);
@@ -23,6 +24,7 @@ export default function LeaderboardPage() {
 
   return (
     <div className="pt-4">
+      <CardDecorations>
       <div className="white-card">
         <div className="white-card-header">Active Sessions</div>
 
@@ -36,7 +38,7 @@ export default function LeaderboardPage() {
           </div>
         ) : (
           <div className="p-0">
-            <div className="flex items-center border-b border-[#e0e0e0] bg-[#f5f5f5] px-4 py-2 text-[10px] uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
+            <div className="flex items-center border-b border-[#e0e0e0] bg-black/4 px-4 py-2 text-[10px] uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
               <span className="w-5">#</span>
               <span className="flex-1">Session</span>
               <span className="w-16 text-right">Evidence</span>
@@ -48,7 +50,7 @@ export default function LeaderboardPage() {
                 <div
                   key={player.id}
                   className={`flex items-center border-b border-[#e0e0e0] px-4 py-2.5 last:border-b-0 ${
-                    i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
+                    i % 2 === 0 ? 'bg-transparent' : 'bg-black/2'
                   } ${isYou ? 'bg-green/5' : ''}`}
                 >
                   <span className="w-5 text-[11px] text-black/40">{i + 1}</span>
@@ -82,6 +84,7 @@ export default function LeaderboardPage() {
           </div>
         )}
       </div>
+      </CardDecorations>
     </div>
   );
 }

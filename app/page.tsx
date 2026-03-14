@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import CardDecorations from '@/components/CardDecorations';
 
 export default function Home() {
   useEffect(() => {
@@ -11,8 +12,8 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <div className="flex flex-col gap-4 pb-8">
+      <CardDecorations>
+        <div className="flex flex-col gap-4">
           {/* Case narrative */}
           <div className="glass-card">
             <div className="glass-body text-[13px] leading-[1.5]">
@@ -52,7 +53,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </CardDecorations>
     </>
   );
 }

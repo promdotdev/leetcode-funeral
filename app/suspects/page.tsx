@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { SUSPECTS } from '@/lib/data';
 import { useGameState } from '@/lib/store';
+import CardDecorations from '@/components/CardDecorations';
 
 function SuspectStatus({ suspectId }: { suspectId: string }) {
   const { isSuspectUnlocked, visitedSuspects, hydrated } = useGameState();
@@ -36,6 +37,7 @@ function SuspectStatus({ suspectId }: { suspectId: string }) {
 export default function SuspectsPage() {
   return (
     <div className="pt-4">
+      <CardDecorations>
       <div className="white-card">
         <div className="white-card-header">Suspects — 8 Records</div>
         <div className="p-0">
@@ -43,8 +45,8 @@ export default function SuspectsPage() {
             <Link
               key={suspect.id}
               href={`/suspect/${suspect.id}`}
-              className={`flex items-center gap-3 border-b border-[#e0e0e0] px-4 py-3 transition-colors last:border-b-0 hover:bg-black/[0.02] ${
-                i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
+              className={`flex items-center gap-3 border-b border-[#e0e0e0] px-4 py-3 transition-colors last:border-b-0 hover:bg-black/2 ${
+                i % 2 === 0 ? 'bg-transparent' : 'bg-black/2'
               }`}
             >
               <div className="min-w-0 flex-1">
@@ -60,6 +62,7 @@ export default function SuspectsPage() {
           ))}
         </div>
       </div>
+      </CardDecorations>
     </div>
   );
 }

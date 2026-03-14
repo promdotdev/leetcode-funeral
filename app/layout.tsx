@@ -3,8 +3,6 @@ import { Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
 import BottomNav from '@/components/BottomNav';
-import Globe from '@/components/Globe';
-import RandomImg from '@/components/RandomImg';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -42,9 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         <Providers>
           <main className="relative z-10 mx-auto min-h-screen max-w-[400px] px-6">
-            <div className="relative pt-4">
-              <Globe />
-              <RandomImg src="/roses.png" className="absolute -bottom-20 -left-15 w-40 z-20 rotate-30" />
+            <div className="pt-4">
               {children}
             </div>
           </main>

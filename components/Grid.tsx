@@ -3,29 +3,16 @@
 import Link from 'next/link';
 import { SUSPECTS } from '@/lib/data';
 import { useGameState } from '@/lib/store';
+import CardDecorations from '@/components/CardDecorations';
 
 const DIMENSIONS = ['motive', 'means', 'opportunity'] as const;
 const DIMENSION_LABELS = { motive: 'MOT', means: 'MNS', opportunity: 'OPP' };
 
 export default function Grid() {
-  const { gridState, progress, isComplete, hydrated } = useGameState();
+  const { gridState, isComplete, hydrated } = useGameState();
 
   return (
     <div>
-      {/* Progress */}
-      <div className="mb-4">
-        <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
-          <span>Evidence: {progress.clues}/24</span>
-          <span>{Math.round((progress.clues / 24) * 100)}%</span>
-        </div>
-        <div className="glass-progress">
-          <div
-            className="glass-progress-fill"
-            style={{ width: hydrated ? `${(progress.clues / 24) * 100}%` : '0%' }}
-          />
-        </div>
-      </div>
-
       {isComplete && (
         <Link href="/accuse" className="glass-btn-primary mb-4 w-full">
           <span>Submit Final Accusation</span>
@@ -34,12 +21,13 @@ export default function Grid() {
       )}
 
       {/* Grid */}
+      <CardDecorations>
       <div className="white-card">
         <div className="white-card-header">Deduction Matrix</div>
         <div className="p-0">
           <table className="w-full border-collapse text-[11px]">
             <thead>
-              <tr className="bg-[#f5f5f5]">
+              <tr className="bg-black/4">
                 <th className="border-b border-r border-[#e0e0e0] p-2 text-left uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}>
                   Suspect
                 </th>
@@ -59,7 +47,7 @@ export default function Grid() {
                 <tr
                   key={suspect.id}
                   className={`${
-                    i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
+                    i % 2 === 0 ? 'bg-transparent' : 'bg-black/2'
                   } border-b border-[#e0e0e0] last:border-b-0`}
                 >
                   <td className="border-r border-[#e0e0e0] p-2">
@@ -94,6 +82,7 @@ export default function Grid() {
           </table>
         </div>
       </div>
+      </CardDecorations>
     </div>
   );
 }
