@@ -32,6 +32,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.variable} ${spaceMono.variable}`}>
         <div className="checkerboard-bg" />
+        <div className="fixed inset-0 z-1 overflow-hidden pointer-events-none">
+          <img src="/detective.png" alt="" className="absolute right-0 bottom-0 h-screen object-contain object-bottom" style={{ transform: 'translateX(35%)' }} />
+          <img src="/skull.png" alt="" className="absolute top-8 -left-[10%] sm:left-4 w-40 sm:w-64 opacity-80 -rotate-15" />
+          <img src="/casket.png" alt="" className="absolute bottom-0 left-2 w-40 sm:w-56 opacity-80" />
+        </div>
         <Providers>
           <main className="relative z-10 mx-auto min-h-screen max-w-[400px] px-6">
             {children}

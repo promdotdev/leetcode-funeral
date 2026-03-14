@@ -12,31 +12,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Full-screen hero — fill width, overflow clips bottom naturally */}
-      <div className="fixed inset-0 z-[1] overflow-hidden" style={{ bottom: '4rem' }}>
-        <div className="checkerboard-bg !fixed" style={{ bottom: '4rem' }} />
-        <Image
-          src="/hero.png"
-          alt="Chrome detective"
-          width={574}
-          height={1400}
-          className="relative w-full h-auto"
-          priority
-        />
-      </div>
-
-      {/* Spacer so content starts below the hero fold */}
-      <div style={{ height: 'calc(100vh - 4rem)' }} />
-
-      {/* Scrollable content — own checkerboard so hero doesn't bleed through */}
-      <div
-        className="relative z-[2]"
-        style={{
-          backgroundColor: '#ffffff',
-          backgroundImage: 'conic-gradient(#e5e5e5 0.25turn, transparent 0.25turn, transparent 0.5turn, #e5e5e5 0.5turn, #e5e5e5 0.75turn, transparent 0.75turn)',
-          backgroundSize: '40px 40px',
-        }}
-      >
+      <div>
         <div className="flex flex-col gap-4 pb-8">
           {/* Globe icon */}
           <div className="flex justify-end pt-4">
