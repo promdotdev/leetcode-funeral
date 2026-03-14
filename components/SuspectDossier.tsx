@@ -10,7 +10,7 @@ export default function SuspectDossier({ id }: { id: string }) {
   const router = useRouter();
   const suspect = getSuspect(id);
   const clues = getCluesForDossier(id);
-  const { markVisited, isSuspectUnlocked, hydrated } = useGameState();
+  const { markVisited, isSuspectUnlocked, collectClue, hydrated } = useGameState();
 
   const unlocked = hydrated && isSuspectUnlocked(id);
 
@@ -21,8 +21,11 @@ export default function SuspectDossier({ id }: { id: string }) {
     }
     if (unlocked) {
       markVisited(id);
+      for (const clue of clues) {
+        collectClue(clue.id, clue.aboutSuspectId, clue.dimension, clue.value);
+      }
     }
-  }, [id, suspect, unlocked, markVisited, router]);
+  }, [id, suspect, unlocked, markVisited, collectClue, clues, router]);
 
   if (!suspect) return null;
 

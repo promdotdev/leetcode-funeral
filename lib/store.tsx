@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react';
 import { upsertPlayer, updatePlayerProgress } from '@/lib/supabase';
+import { CORRECT_ANSWER } from '@/lib/data';
 
 interface GameState {
   collectedClues: string[];
@@ -10,6 +11,7 @@ interface GameState {
   unlockedSuspects: string[];
   playerName: string | null;
   solved: boolean;
+  accusation: string | null;
 }
 
 interface GameStore {
@@ -19,12 +21,14 @@ interface GameStore {
   visitedSuspects: string[];
   unlockedSuspects: string[];
   playerName: string | null;
+  accusation: string | null;
   collectClue: (clueId: string, aboutSuspectId: string, dimension: string, value: boolean) => void;
   markVisited: (suspectId: string) => void;
   unlockSuspect: (suspectId: string) => void;
   isSuspectUnlocked: (suspectId: string) => boolean;
   setPlayerName: (name: string) => void;
   markSolved: () => void;
+  submitAccusation: (suspectId: string) => void;
   isClueCollected: (clueId: string) => boolean;
   isComplete: boolean;
   progress: { clues: number; suspects: number };
@@ -39,6 +43,7 @@ const defaultState: GameState = {
   unlockedSuspects: [],
   playerName: null,
   solved: false,
+  accusation: null,
 };
 
 function loadState(): GameState {
@@ -181,6 +186,21 @@ export function GameProvider({ children }: { children: ReactNode }) {
     });
   }, [syncToSupabase]);
 
+  const submitAccusation = useCallback((suspectId: string) => {
+    setState((prev) => {
+      if (prev.accusation) return prev;
+      const isCorrect = suspectId === CORRECT_ANSWER;
+      const next: GameState = {
+        ...prev,
+        accusation: suspectId,
+        solved: isCorrect ? true : prev.solved,
+      };
+      saveState(next);
+      syncToSupabase(next);
+      return next;
+    });
+  }, [syncToSupabase]);
+
   const isClueCollected = useCallback(
     (clueId: string) => state.collectedClues.includes(clueId),
     [state.collectedClues]
@@ -193,12 +213,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
     visitedSuspects: state.visitedSuspects,
     unlockedSuspects: state.unlockedSuspects,
     playerName: state.playerName,
+    accusation: state.accusation,
     collectClue,
     markVisited,
     unlockSuspect,
     isSuspectUnlocked,
     setPlayerName,
     markSolved,
+    submitAccusation,
     isClueCollected,
     isComplete: state.collectedClues.length >= 24,
     progress: {

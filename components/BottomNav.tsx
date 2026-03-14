@@ -31,10 +31,21 @@ const SuspectsIcon = () => (
   </svg>
 );
 
+const ScanIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="6" y="6" width="8" height="8" rx="1.5" />
+    <path d="M2 6V3.5A1.5 1.5 0 0 1 3.5 2H6" />
+    <path d="M14 2h2.5A1.5 1.5 0 0 1 18 3.5V6" />
+    <path d="M18 14v2.5A1.5 1.5 0 0 1 16.5 18H14" />
+    <path d="M6 18H3.5A1.5 1.5 0 0 1 2 16.5V14" />
+  </svg>
+);
+
 const icons: Record<string, () => React.ReactNode> = {
   '/grid': GridIcon,
   '/leaderboard': LiveIcon,
   '/suspects': SuspectsIcon,
+  '/scan': ScanIcon,
 };
 
 export default function BottomNav() {
@@ -44,9 +55,10 @@ export default function BottomNav() {
   if (pathname === '/penances' || pathname === '/penances-display') return null;
 
   const tabs = [
-    { href: '/grid', label: 'Grid', badge: hydrated ? `${progress.clues}/24` : null },
+    { href: '/grid', label: 'Tracker', badge: hydrated ? `${progress.clues}/24` : null },
     { href: '/leaderboard', label: 'Live', badge: null },
     { href: '/suspects', label: 'Suspects', badge: hydrated ? `${progress.suspects}/8` : null },
+    { href: '/scan', label: 'Scan', badge: null },
   ];
 
   return (

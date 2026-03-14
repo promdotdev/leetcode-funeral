@@ -6,82 +6,69 @@ import { useGameState } from '@/lib/store';
 import CardDecorations from '@/components/CardDecorations';
 
 const DIMENSIONS = ['motive', 'means', 'opportunity'] as const;
-const DIMENSION_LABELS = { motive: 'MOT', means: 'MNS', opportunity: 'OPP' };
+
+function DimensionPill({ label, value }: { label: string; value: boolean | undefined }) {
+  if (value === true) {
+    return (
+      <span className="rounded-full px-2.5 py-1 text-[10px] uppercase bg-glass-yes/20 text-glass-yes font-medium" style={{ fontFamily: 'var(--font-mono)' }}>
+        {label}
+      </span>
+    );
+  }
+  if (value === false) {
+    return (
+      <span className="rounded-full px-2.5 py-1 text-[10px] uppercase bg-glass-no/20 text-glass-no font-medium" style={{ fontFamily: 'var(--font-mono)' }}>
+        {label}
+      </span>
+    );
+  }
+  return (
+    <span className="rounded-full px-2.5 py-1 text-[10px] uppercase bg-black/8 text-black/30" style={{ fontFamily: 'var(--font-mono)' }}>
+      {label}
+    </span>
+  );
+}
 
 export default function Grid() {
-  const { gridState, isComplete, hydrated } = useGameState();
+  const { gridState, accusation, hydrated } = useGameState();
 
   return (
     <div>
-      {isComplete && (
-        <Link href="/accuse" className="glass-btn-primary mb-4 w-full">
-          <span>Submit Final Accusation</span>
-          <span>▶</span>
-        </Link>
-      )}
-
-      {/* Grid */}
       <CardDecorations>
-      <div className="white-card">
-        <div className="white-card-header">Deduction Matrix</div>
-        <div className="p-0">
-          <table className="w-full border-collapse text-[11px]">
-            <thead>
-              <tr className="bg-black/4">
-                <th className="border-b border-r border-[#e0e0e0] p-2 text-left uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}>
-                  Suspect
-                </th>
-                {DIMENSIONS.map((d) => (
-                  <th
-                    key={d}
-                    className="border-b border-r border-[#e0e0e0] p-2 text-center uppercase text-black/50 last:border-r-0"
-                    style={{ fontFamily: 'var(--font-mono)', fontSize: 10 }}
-                  >
-                    {DIMENSION_LABELS[d]}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {SUSPECTS.map((suspect, i) => (
-                <tr
-                  key={suspect.id}
-                  className={`${
-                    i % 2 === 0 ? 'bg-white' : 'bg-black/2'
-                  } border-b border-[#e0e0e0] last:border-b-0`}
-                >
-                  <td className="border-r border-[#e0e0e0] p-2">
-                    <Link
-                      href={`/suspect/${suspect.id}`}
-                      className="text-black underline decoration-black/20 hover:text-glass-hot"
-                    >
-                      {suspect.name}
-                    </Link>
-                  </td>
-                  {DIMENSIONS.map((dim) => {
-                    const key = `${suspect.id}-${dim}`;
-                    const val = gridState[key];
-                    let cellText = '';
-                    let textColor = '';
-                    if (hydrated && val !== undefined) {
-                      textColor = val ? 'text-glass-yes font-bold' : 'text-glass-no font-bold';
-                      cellText = val ? 'YES' : 'NO';
-                    }
-                    return (
-                      <td
-                        key={key}
-                        className={`border-r border-[#e0e0e0] p-2 text-center last:border-r-0 ${textColor}`}
-                      >
-                        {cellText}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="glass-card mb-4">
+          {SUSPECTS.map((suspect, i) => (
+            <div
+              key={suspect.id}
+              className={`px-4 py-3 ${i < SUSPECTS.length - 1 ? 'border-b border-black/8' : ''}`}
+            >
+              <Link
+                href={`/suspect/${suspect.id}`}
+                className="text-[13px] font-medium text-black hover:text-glass-hot"
+              >
+                {suspect.name}
+              </Link>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {DIMENSIONS.map((dim) => {
+                  const val = hydrated ? gridState[`${suspect.id}-${dim}`] : undefined;
+                  return <DimensionPill key={dim} label={dim} value={val} />;
+                })}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+
+        {accusation ? (
+          <div className="glass-card">
+            <div className="glass-body text-center text-[12px] text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
+              Accusation submitted
+            </div>
+          </div>
+        ) : (
+          <Link href="/accuse" className="glass-btn-primary w-full">
+            <span>Accuse Someone</span>
+            <span>→</span>
+          </Link>
+        )}
       </CardDecorations>
     </div>
   );
