@@ -3,6 +3,7 @@ import { Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
 import BottomNav from '@/components/BottomNav';
+import SplashScreen from '@/components/SplashScreen';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <img src="/casket.png" alt="" className="absolute bottom-0 left-2 w-40 sm:w-56 opacity-80" />
           <img src="/lily.png" alt="" className="hidden sm:block absolute bottom-14 left-72 w-56 opacity-80" />
         </div>
+        <SplashScreen />
         <Providers>
           <main className="relative z-10 mx-auto min-h-screen max-w-[400px] px-6">
             <div className="pt-4">

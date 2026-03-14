@@ -47,7 +47,7 @@ export default function Grid() {
                 <tr
                   key={suspect.id}
                   className={`${
-                    i % 2 === 0 ? 'bg-transparent' : 'bg-black/2'
+                    i % 2 === 0 ? 'bg-white' : 'bg-black/2'
                   } border-b border-[#e0e0e0] last:border-b-0`}
                 >
                   <td className="border-r border-[#e0e0e0] p-2">

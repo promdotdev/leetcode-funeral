@@ -46,7 +46,7 @@ export default function SuspectsPage() {
               key={suspect.id}
               href={`/suspect/${suspect.id}`}
               className={`flex items-center gap-3 border-b border-[#e0e0e0] px-4 py-3 transition-colors last:border-b-0 hover:bg-black/2 ${
-                i % 2 === 0 ? 'bg-transparent' : 'bg-black/2'
+                i % 2 === 0 ? 'bg-white' : 'bg-black/2'
               }`}
             >
               <div className="min-w-0 flex-1">
