@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import Image from 'next/image';
 
 export default function Home() {
   useEffect(() => {
@@ -14,16 +13,6 @@ export default function Home() {
     <>
       <div>
         <div className="flex flex-col gap-4 pb-8">
-          {/* Globe icon */}
-          <div className="flex justify-end pt-4">
-            <Image
-              src="/globe.png"
-              alt=""
-              width={64}
-              height={64}
-            />
-          </div>
-
           {/* Case narrative */}
           <div className="glass-card">
             <div className="glass-body text-[13px] leading-[1.5]">
@@ -61,24 +50,6 @@ export default function Home() {
                 </li>
               </ol>
             </div>
-          </div>
-
-          {/* Roses + Casket composition */}
-          <div className="relative mx-auto w-64 py-4" style={{ height: 200 }}>
-            <Image
-              src="/casket.png"
-              alt="Casket"
-              width={280}
-              height={180}
-              className="absolute right-0 bottom-2 w-48 h-auto"
-            />
-            <Image
-              src="/roses.png"
-              alt="Pink roses"
-              width={140}
-              height={80}
-              className="absolute left-0 bottom-0 w-28 h-auto"
-            />
           </div>
         </div>
       </div>

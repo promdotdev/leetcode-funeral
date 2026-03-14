@@ -50,6 +50,19 @@ export default function BottomNav() {
   return (
     <nav className="glass-nav fixed bottom-0 left-0 right-0 z-50">
       <div className="mx-auto flex max-w-[400px] items-stretch justify-around px-4">
+        <Link
+          href="/"
+          className={`flex flex-col items-center justify-center gap-1 py-3 text-[11px] uppercase transition-colors ${
+            pathname === '/' ? 'text-black' : 'text-black/40 hover:text-black/70'
+          }`}
+          style={{ fontFamily: 'var(--font-mono)', width: 72 }}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M3 10l7-7 7 7" />
+            <path d="M5 8.5V16h4v-4h2v4h4V8.5" />
+          </svg>
+          <span>Home</span>
+        </Link>
         {tabs.map((tab) => {
           const Icon = icons[tab.href];
           const active = pathname === tab.href;

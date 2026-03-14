@@ -82,10 +82,6 @@ export default function LeaderboardPage() {
           </div>
         )}
       </div>
-
-      <p className="mt-3 text-center text-[10px] uppercase text-black/25" style={{ fontFamily: 'var(--font-mono)' }}>
-        Live — refreshing every 5s
-      </p>
     </div>
   );
 }
