@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useGameState } from '@/lib/store';
 
 export default function NameModal() {
+  const pathname = usePathname();
   const { playerName, setPlayerName, hydrated } = useGameState();
   const [input, setInput] = useState('');
 
+  if (pathname === '/penances' || pathname === '/penances-display') return null;
   if (!hydrated || playerName) return null;
 
   return (

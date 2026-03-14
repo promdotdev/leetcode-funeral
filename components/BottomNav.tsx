@@ -41,6 +41,8 @@ export default function BottomNav() {
   const pathname = usePathname();
   const { progress, hydrated } = useGameState();
 
+  if (pathname === '/penances' || pathname === '/penances-display') return null;
+
   const tabs = [
     { href: '/grid', label: 'Grid', badge: hydrated ? `${progress.clues}/24` : null },
     { href: '/leaderboard', label: 'Live', badge: null },
