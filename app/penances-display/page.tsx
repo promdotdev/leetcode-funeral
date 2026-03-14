@@ -200,10 +200,10 @@ function Receipt({ penance }: { penance: Penance }) {
         background: 'rgba(255, 255, 255, 0.92)',
         border: '1px solid rgba(255,255,255,0.3)',
         borderRadius: 2,
-        fontFamily: 'var(--font-body), "Inter", system-ui, sans-serif',
-        fontSize: 18,
+        fontFamily: '"Courier New", "Courier", monospace',
+        fontSize: 16,
         fontWeight: 700,
-        letterSpacing: '-0.02em',
+        letterSpacing: '0',
         color: '#222',
         padding: '36px 32px',
         position: 'relative',
@@ -250,7 +250,7 @@ function Receipt({ penance }: { penance: Penance }) {
       <div style={{ textAlign: 'center', fontSize: 13, color: '#888', letterSpacing: 4, marginBottom: 10, fontWeight: 400 }}>
         --- SINS COMMITTED ---
       </div>
-      <div style={{ marginBottom: 10 }}>
+      <div style={{ marginBottom: 10, fontWeight: 400 }}>
         {penance.sins.map((sin, i) => (
           <div key={i} style={{ marginBottom: 3, paddingLeft: 6 }}>
             {i + 1}. {sin}

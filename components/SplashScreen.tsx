@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function SplashScreen() {
+  const pathname = usePathname();
   const [phase, setPhase] = useState<'visible' | 'fading' | 'gone'>('visible');
 
   useEffect(() => {
@@ -15,6 +17,7 @@ export default function SplashScreen() {
   }, []);
 
   if (phase === 'gone') return null;
+  if (pathname === '/penances' || pathname === '/penances-display') return null;
 
   return (
     <div

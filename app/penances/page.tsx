@@ -80,16 +80,19 @@ const SEVERITY_COLORS: Record<string, string> = {
   UNFORGIVABLE: '#e11d8f',
 };
 
+const PER_PAGE = 6;
+
 export default function PenancesPage() {
   const [penances, setPenances] = useState<Penance[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
 
   const load = useCallback(async () => {
     const { data, error } = await supabase
       .from('penances')
       .select('*')
       .order('created_at', { ascending: false })
-      .limit(100);
+      .limit(500);
 
     if (!error && data) {
       setPenances(data as Penance[]);
@@ -103,22 +106,32 @@ export default function PenancesPage() {
     return () => clearInterval(interval);
   }, [load]);
 
+  const totalPages = Math.ceil(penances.length / PER_PAGE);
+  const paged = penances.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
+
   return (
     <div className="fixed inset-0 overflow-auto bg-[#0a0a0a]" style={{ padding: 16, zIndex: 9999 }}>
       <AsciiBackground />
       <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div style={{
-          textAlign: 'center',
-          fontFamily: 'var(--font-body), "Inter", system-ui, sans-serif',
-          color: '#cc2222',
-          fontSize: 14,
-          letterSpacing: 4,
-          padding: '16px 0 8px',
-          textTransform: 'uppercase',
-          opacity: 0.8,
-        }}>
-          Confession Receipts
-        </div>
+        <a
+          href="https://prom.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body), "Inter", system-ui, sans-serif',
+            color: '#cc2222',
+            fontSize: 14,
+            letterSpacing: 4,
+            padding: '16px 0 8px',
+            textTransform: 'uppercase',
+            opacity: 0.8,
+            textDecoration: 'none',
+          }}
+        >
+          prom.dev
+        </a>
 
         {loading ? (
           <div className="p-6 text-center text-[12px] text-black/50">
@@ -129,12 +142,69 @@ export default function PenancesPage() {
             No sinners have confessed yet.
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {penances.map((p) => (
-              <Receipt key={p.id} penance={p} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {paged.map((p) => (
+                <Receipt key={p.id} penance={p} />
+              ))}
+            </div>
+
+            {totalPages > 1 && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 16,
+                padding: '20px 0 8px',
+              }}>
+                <button
+                  onClick={() => setPage((p) => Math.max(0, p - 1))}
+                  disabled={page === 0}
+                  style={{
+                    fontFamily: 'var(--font-body), "Inter", sans-serif',
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: page === 0 ? '#444' : '#cc2222',
+                    background: 'none',
+                    border: 'none',
+                    cursor: page === 0 ? 'default' : 'pointer',
+                    letterSpacing: 2,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Prev
+                </button>
+                <span style={{
+                  fontFamily: 'var(--font-body), "Inter", sans-serif',
+                  fontSize: 12,
+                  color: '#cc2222',
+                  opacity: 0.6,
+                  letterSpacing: 1,
+                }}>
+                  {page + 1} / {totalPages}
+                </span>
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+                  disabled={page >= totalPages - 1}
+                  style={{
+                    fontFamily: 'var(--font-body), "Inter", sans-serif',
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: page >= totalPages - 1 ? '#444' : '#cc2222',
+                    background: 'none',
+                    border: 'none',
+                    cursor: page >= totalPages - 1 ? 'default' : 'pointer',
+                    letterSpacing: 2,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
         )}
+
       </div>
     </div>
   );
@@ -152,10 +222,10 @@ function Receipt({ penance }: { penance: Penance }) {
         background: 'rgba(255, 255, 255, 0.92)',
         border: '1px solid rgba(255,255,255,0.3)',
         borderRadius: 2,
-        fontFamily: 'var(--font-body), "Inter", system-ui, sans-serif',
-        fontSize: 13,
+        fontFamily: '"Courier New", "Courier", monospace',
+        fontSize: 15,
         fontWeight: 700,
-        letterSpacing: '-0.02em',
+        letterSpacing: '0',
         color: '#222',
         padding: '20px 16px',
         position: 'relative',
@@ -198,7 +268,7 @@ function Receipt({ penance }: { penance: Penance }) {
       <div style={{ textAlign: 'center', fontSize: 10, color: '#888', letterSpacing: 2, marginBottom: 6 }}>
         --- SINS COMMITTED ---
       </div>
-      <div style={{ marginBottom: 8 }}>
+      <div style={{ marginBottom: 8, fontWeight: 400 }}>
         {penance.sins.map((sin, i) => (
           <div key={i} style={{ marginBottom: 2, paddingLeft: 4 }}>
             {i + 1}. {sin}
