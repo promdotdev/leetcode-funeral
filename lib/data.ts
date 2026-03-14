@@ -23,7 +23,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'CEO, Stealth AI Startup',
     role: 'The cheating tool kingpin',
     bio: "Cody built his cheating tool by reverse-engineering CodeScreen's scoring system. Spent years crawling the architecture. He knows the platform well enough to breach it. Invited guest at the launch, backstage pass, looks terrible on paper.",
-    unlockKey: 'cody01',
+    unlockKey: 'c23608',
   },
   {
     id: 'andre',
@@ -31,7 +31,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'Open-Source Evangelist, "Ship or Die" Author',
     role: 'The vibe coder who started a movement',
     bio: "Andre's famous open-source project is the foundational library that CodeScreen Enterprise is built on. He wrote the original codebase years ago. Lee mocked his manifesto in a keynote. Bitter rivalry, real technical depth. At the launch as an industry figure.",
-    unlockKey: 'andre01',
+    unlockKey: 'e4dab4',
   },
   {
     id: 'chase',
@@ -39,7 +39,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'Managing Partner, Disruption Capital',
     role: 'The money behind every disruption',
     bio: "Follow the money. Chase bankrolled the cheating tools, the AI labs, the alternative platforms. $40M riding on CodeScreen's replacement. At the launch as a major investor with a backstage pass. Chase also can't write a line of code.",
-    unlockKey: 'chase01',
+    unlockKey: '3dd4dc',
   },
   {
     id: 'goodhart',
@@ -47,7 +47,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'Tenured Measurement Theorist',
     role: 'The academic with a law named after them',
     bio: 'Quiet. Professorial. Lee personally recruited Goodhart to build the core model for CodeScreen Enterprise. On paper, a neutral advisor. Goodhart spent months with privileged access to the codebase and production systems.',
-    unlockKey: 'good01',
+    unlockKey: 'c0bb31',
   },
   {
     id: 'marianne',
@@ -55,7 +55,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'Founder, Klew Studio',
     role: 'The ARG designer who wants to replace CodeScreen',
     bio: "Marianne builds ARG-based technical assessments. Her business grows every time a company drops CodeScreen. At the launch presenting alternative approaches, backstage access. Narrative designer, not an engineer.",
-    unlockKey: 'mari01',
+    unlockKey: 'd87a8f',
   },
   {
     id: 'jordan',
@@ -63,7 +63,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'CEO, CodePath Academy',
     role: 'The bootcamp that taught a generation to game the system',
     bio: "Jordan's bootcamp built deep CodeScreen integrations. The engineering team knows the architecture well. Jordan has admin access and was at the launch as a training partner with backstage access.",
-    unlockKey: 'jord01',
+    unlockKey: 'a02b6c',
   },
   {
     id: 'taylor',
@@ -71,7 +71,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'Engineering Manager, Major Tech Company',
     role: '"I just want someone who can do the job"',
     bio: "Taylor failed their own company's CodeScreen assessment and got hired through a referral backdoor. Lee publicly embarrassed Taylor at an all-hands. At the launch as a hiring committee rep with backstage access.",
-    unlockKey: 'tayl01',
+    unlockKey: '062acb',
   },
   {
     id: 'syd',
@@ -79,7 +79,7 @@ export const SUSPECTS: Suspect[] = [
     title: 'Creator, System Design Interview Framework',
     role: 'The format that replaced CodeScreen rounds',
     bio: "Former CodeScreen senior engineer. Built parts of the scoring engine. Fired by Lee for proposing system design questions. Knows the platform from the inside. At the launch but deliberately excluded from backstage clearance by Lee.",
-    unlockKey: 'syd001',
+    unlockKey: 'b8e07b',
   },
 ];
 
