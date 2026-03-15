@@ -8,6 +8,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export interface MysteryPlayer {
   id: string;
   name: string;
+  email: string | null;
   session_id: string;
   clue_count: number;
   suspect_count: number;
@@ -16,11 +17,11 @@ export interface MysteryPlayer {
   updated_at: string;
 }
 
-export async function upsertPlayer(sessionId: string, name: string): Promise<MysteryPlayer | null> {
+export async function upsertPlayer(sessionId: string, name: string, email?: string): Promise<MysteryPlayer | null> {
   const { data, error } = await supabase
     .from('mystery_players')
     .upsert(
-      { session_id: sessionId, name },
+      { session_id: sessionId, name, ...(email ? { email } : {}) },
       { onConflict: 'session_id' }
     )
     .select()

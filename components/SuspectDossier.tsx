@@ -34,27 +34,27 @@ export default function SuspectDossier({ id }: { id: string }) {
       {/* Dossier header card */}
       <div className="glass-card mb-4">
         <div className="glass-body">
-          <div className="text-[10px] uppercase tracking-wider text-black/50 mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
+          <div className="text-[10px] uppercase tracking-wider text-white/40 mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
             Dossier — {suspect.id.toUpperCase()}
           </div>
           <h1 className="text-[16px]" style={{ fontFamily: 'var(--font-mono)' }}>{suspect.name}</h1>
-          <div className="mt-1 text-[12px] text-black/60">
+          <div className="mt-1 text-[12px] text-white/60">
             {suspect.title}
           </div>
-          <div className="mt-0.5 text-[11px] italic text-black/50">
+          <div className="mt-0.5 text-[11px] italic text-white/40">
             {suspect.role}
           </div>
 
           {unlocked ? (
-            <p className="mt-3 text-[12px] leading-[1.4] text-black/80">
+            <p className="mt-3 text-[12px] leading-[1.4] text-white/70">
               {suspect.bio}
             </p>
           ) : (
-            <div className="mt-3 rounded-lg bg-black/5 p-3">
-              <p className="text-[12px] text-black/50 text-center" style={{ fontFamily: 'var(--font-mono)' }}>
+            <div className="mt-3 rounded-lg bg-white/5 p-3">
+              <p className="text-[12px] text-white/40 text-center" style={{ fontFamily: 'var(--font-mono)' }}>
                 [ CLASSIFIED ]
               </p>
-              <p className="mt-2 text-[11px] text-black/40 text-center">
+              <p className="mt-2 text-[11px] text-white/30 text-center">
                 Scan the NFC tag to access this dossier
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function SuspectDossier({ id }: { id: string }) {
 
       {unlocked ? (
         <>
-          <div className="mb-3 text-[11px] uppercase tracking-wider text-black/40" style={{ fontFamily: 'var(--font-mono)' }}>
+          <div className="mb-3 text-[11px] uppercase tracking-wider text-white/40" style={{ fontFamily: 'var(--font-mono)' }}>
             Archived Evidence — {clues.length} clips
           </div>
           <div className="space-y-3">
@@ -77,10 +77,10 @@ export default function SuspectDossier({ id }: { id: string }) {
         <div className="glass-card">
           <div className="glass-body text-center">
             <div className="text-[24px] mb-2">🔒</div>
-            <p className="text-[12px] text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
+            <p className="text-[12px] text-white/50" style={{ fontFamily: 'var(--font-mono)' }}>
               {clues.length} evidence clips locked
             </p>
-            <p className="mt-1 text-[11px] text-black/40">
+            <p className="mt-1 text-[11px] text-white/30">
               Find this suspect&apos;s NFC sticker to unlock
             </p>
           </div>

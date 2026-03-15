@@ -7,7 +7,7 @@ export default function EvidenceBar() {
 
   return (
     <div className="mb-4">
-      <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
+      <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase text-white/50" style={{ fontFamily: 'var(--font-mono)' }}>
         <span>Evidence: {progress.clues}/24</span>
         <span>{Math.round((progress.clues / 24) * 100)}%</span>
       </div>

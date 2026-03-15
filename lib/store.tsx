@@ -10,6 +10,7 @@ interface GameState {
   visitedSuspects: string[];
   unlockedSuspects: string[];
   playerName: string | null;
+  playerEmail: string | null;
   solved: boolean;
   accusation: string | null;
 }
@@ -21,12 +22,13 @@ interface GameStore {
   visitedSuspects: string[];
   unlockedSuspects: string[];
   playerName: string | null;
+  playerEmail: string | null;
   accusation: string | null;
   collectClue: (clueId: string, aboutSuspectId: string, dimension: string, value: boolean) => void;
   markVisited: (suspectId: string) => void;
   unlockSuspect: (suspectId: string) => void;
   isSuspectUnlocked: (suspectId: string) => boolean;
-  setPlayerName: (name: string) => void;
+  setPlayerName: (name: string, email: string) => void;
   markSolved: () => void;
   submitAccusation: (suspectId: string) => void;
   isClueCollected: (clueId: string) => boolean;
@@ -42,6 +44,7 @@ const defaultState: GameState = {
   visitedSuspects: [],
   unlockedSuspects: [],
   playerName: null,
+  playerEmail: null,
   solved: false,
   accusation: null,
 };
@@ -161,15 +164,15 @@ export function GameProvider({ children }: { children: ReactNode }) {
     [state.unlockedSuspects]
   );
 
-  const setPlayerName = useCallback((name: string) => {
+  const setPlayerName = useCallback((name: string, email: string) => {
     const sessionId = getSessionId();
     setState((prev) => {
-      const next = { ...prev, playerName: name };
+      const next = { ...prev, playerName: name, playerEmail: email };
       saveState(next);
       return next;
     });
     // Create/update player in Supabase
-    upsertPlayer(sessionId, name).then(() => {
+    upsertPlayer(sessionId, name, email).then(() => {
       // Sync current progress immediately
       const current = loadState();
       updatePlayerProgress(sessionId, current.collectedClues.length, current.visitedSuspects.length, current.solved);
@@ -213,6 +216,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     visitedSuspects: state.visitedSuspects,
     unlockedSuspects: state.unlockedSuspects,
     playerName: state.playerName,
+    playerEmail: state.playerEmail,
     accusation: state.accusation,
     collectClue,
     markVisited,

@@ -45,7 +45,7 @@ export default function UnlockHandler({ id }: { id: string }) {
             <h2 className="text-[14px] mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
               Access Denied
             </h2>
-            <p className="text-[12px] text-black/60 leading-[1.4]">
+            <p className="text-[12px] text-white/60 leading-[1.4]">
               This suspect&apos;s file requires physical clearance.
               Find and scan the NFC tag to unlock.
             </p>
@@ -56,7 +56,7 @@ export default function UnlockHandler({ id }: { id: string }) {
   }
 
   return (
-    <div className="pt-4 text-center text-black/40">
+    <div className="pt-4 text-center text-white/40">
       Verifying clearance...
     </div>
   );

@@ -24,12 +24,6 @@ const LiveIcon = () => (
   </svg>
 );
 
-const SuspectsIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <circle cx="10" cy="7" r="3" />
-    <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" />
-  </svg>
-);
 
 const ScanIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -44,7 +38,6 @@ const ScanIcon = () => (
 const icons: Record<string, () => React.ReactNode> = {
   '/grid': GridIcon,
   '/leaderboard': LiveIcon,
-  '/suspects': SuspectsIcon,
   '/scan': ScanIcon,
 };
 
@@ -57,7 +50,6 @@ export default function BottomNav() {
   const tabs = [
     { href: '/grid', label: 'Tracker', badge: hydrated ? `${progress.clues}/24` : null },
     { href: '/leaderboard', label: 'Live', badge: null },
-    { href: '/suspects', label: 'Suspects', badge: hydrated ? `${progress.suspects}/8` : null },
     { href: '/scan', label: 'Scan', badge: null },
   ];
 
@@ -67,15 +59,16 @@ export default function BottomNav() {
         <Link
           href="/"
           className={`flex flex-col items-center justify-center gap-1 py-3 text-[11px] uppercase transition-colors ${
-            pathname === '/' ? 'text-black' : 'text-black/40 hover:text-black/70'
+            pathname === '/' ? 'text-white' : 'text-white/40 hover:text-white/70'
           }`}
           style={{ fontFamily: 'var(--font-mono)', width: 72 }}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M3 10l7-7 7 7" />
-            <path d="M5 8.5V16h4v-4h2v4h4V8.5" />
+            <circle cx="10" cy="10" r="7" />
+            <line x1="10" y1="9" x2="10" y2="14" />
+            <circle cx="10" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
           </svg>
-          <span>Home</span>
+          <span>Info</span>
         </Link>
         {tabs.map((tab) => {
           const Icon = icons[tab.href];
@@ -85,7 +78,7 @@ export default function BottomNav() {
               key={tab.href}
               href={tab.href}
               className={`flex flex-col items-center justify-center gap-1 py-3 text-[11px] uppercase transition-colors ${
-                active ? 'text-black' : 'text-black/40 hover:text-black/70'
+                active ? 'text-white' :'text-white/40 hover:text-white/70'
               }`}
               style={{ fontFamily: 'var(--font-mono)', width: 72 }}
             >

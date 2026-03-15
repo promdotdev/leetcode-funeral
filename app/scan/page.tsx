@@ -1,41 +1,45 @@
+'use client';
+
 import CardDecorations from '@/components/CardDecorations';
+import ScanGlowBorder from '@/components/ScanGlowBorder';
+import { useGameState } from '@/lib/store';
 
 export default function ScanPage() {
+  const { collectedClues } = useGameState();
+  const isFirstScan = collectedClues.length === 0;
+
   return (
     <CardDecorations>
-      <div className="glass-card">
-        <div className="glass-body text-[13px] leading-[1.5]">
-          <p className="font-medium">How to scan a tag</p>
+      <ScanGlowBorder />
+      <div className="flex min-h-[calc(100svh-8rem)] flex-col items-center justify-center gap-4">
+        {isFirstScan && (
+          <div className="glass-card w-full">
+            <div className="white-card-header bg-green-500 text-black">
+              The hunt has begun
+            </div>
+            <div className="glass-body py-4 text-center text-[13px] text-[var(--color-glass-muted)]">
+              Look for NFC stickers on random items that seem out of place. Scan them to collect clues.
+            </div>
+          </div>
+        )}
+        <div className="glass-card w-full">
+          <div className="glass-body text-[13px] leading-[1.5]">
+            <p className="font-medium">How to scan a tag</p>
 
-          <ol className="mt-4 list-decimal space-y-4 pl-5">
-            <li>
-              <span className="font-medium">Find a tagged item</span> — look for objects
-              around the party with a small NFC sticker.
-            </li>
-            <li>
-              <span className="font-medium">Unlock your phone</span> — NFC scanning
-              requires the screen to be on and unlocked.
-            </li>
-            <li>
-              <span className="font-medium">Hold your phone near the tag</span> — bring
-              the top-back of your phone (where the NFC chip lives) close to the sticker.
-            </li>
-            <li>
-              <span className="font-medium">Wait for the notification</span> — your phone
-              will vibrate and a banner will appear. Tap it to open the dossier.
-            </li>
-            <li>
-              <span className="font-medium">Review the clues</span> — tap &ldquo;Add to
-              Session&rdquo; to save them to your evidence tracker.
-            </li>
-          </ol>
+            <ol className="mt-4 list-decimal space-y-3 pl-5">
+              <li>Find an NFC sticker on an object at the party.</li>
+              <li>Unlock your phone.</li>
+              <li>Hold the back of your phone to the sticker.</li>
+              <li>Tap the banner that appears.</li>
+              <li>Tap &ldquo;Add to Session&rdquo; to save the clues.</li>
+            </ol>
 
-          <div className="mt-5 rounded-lg bg-black/10 px-4 py-3 text-[12px]">
-            <p className="font-medium">Tip</p>
-            <p className="mt-1">
-              iPhone users: NFC is on by default — no app needed. Android users: make
-              sure NFC is enabled in Settings.
-            </p>
+            <div className="mt-5 rounded-lg bg-black/10 px-4 py-3 text-[12px]">
+              <p className="font-medium">Tip</p>
+              <p className="mt-1">
+                iPhone: NFC is on by default. Android: enable NFC in Settings.
+              </p>
+            </div>
           </div>
         </div>
       </div>

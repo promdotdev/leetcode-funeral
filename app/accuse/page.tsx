@@ -20,10 +20,18 @@ export default function AccusePage() {
         <div className="pt-4">
           <div className="glass-card">
             <div className="glass-body space-y-3 text-[12px] leading-[1.4]">
-              <p className="text-[16px] font-bold text-black" style={{ fontFamily: 'var(--font-mono)' }}>CORRECT.</p>
+              <p className="text-[16px] font-bold text-white" style={{ fontFamily: 'var(--font-mono)' }}>CORRECT.</p>
               {REVEAL_TEXT.split('\n\n').map((para, i) => (
-                <p key={i} className="text-black/80">{para}</p>
+                <p key={i} className="text-white/70">{para}</p>
               ))}
+              <div className="mt-4 border-t border-white/10 pt-4">
+                <p className="text-[13px] text-white font-bold mb-1" style={{ fontFamily: 'var(--font-mono)' }}>
+                  Find a prom.dev team member.
+                </p>
+                <p className="text-[12px] text-white/60">
+                  Show them this screen to claim your reward.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -37,10 +45,10 @@ export default function AccusePage() {
             <p className="mb-1 text-[16px] font-bold text-glass-no" style={{ fontFamily: 'var(--font-mono)' }}>
               Incorrect.
             </p>
-            <p className="mb-1 text-[12px] text-black/60">
+            <p className="mb-1 text-[12px] text-white/60">
               You accused {accusedName}.
             </p>
-            <p className="text-[11px] text-black/40">
+            <p className="text-[11px] text-white/40">
               Your one accusation has been used. The killer walks free.
             </p>
           </div>
@@ -56,19 +64,19 @@ export default function AccusePage() {
       <div className="pt-4">
         <div className="glass-card mb-4">
           <div className="glass-body text-center">
-            <p className="text-[11px] uppercase text-black/40 mb-3" style={{ fontFamily: 'var(--font-mono)' }}>
+            <p className="text-[11px] uppercase text-white/40 mb-3" style={{ fontFamily: 'var(--font-mono)' }}>
               Final Warning
             </p>
-            <p className="text-[15px] font-bold text-black mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
+            <p className="text-[15px] font-bold text-white mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
               You only get one chance.
             </p>
-            <p className="text-[12px] text-black/60 mb-1">
+            <p className="text-[12px] text-white/60 mb-1">
               You are accusing:
             </p>
-            <p className="text-[14px] font-bold text-black mb-4">
+            <p className="text-[14px] font-bold text-white mb-4">
               {suspectName}
             </p>
-            <p className="text-[11px] text-black/50 mb-5">
+            <p className="text-[11px] text-white/50 mb-5">
               This cannot be undone. Are you certain?
             </p>
             <div className="flex gap-3">
@@ -97,7 +105,7 @@ export default function AccusePage() {
     <div className="pt-4">
       {progress.clues < 24 && (
         <div className="glass-card mb-4">
-          <div className="glass-body py-3 text-center text-[11px] text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>
+          <div className="glass-body py-3 text-center text-[11px] text-white/50" style={{ fontFamily: 'var(--font-mono)' }}>
             {progress.clues}/24 clues found — you may still accuse
           </div>
         </div>
@@ -108,7 +116,7 @@ export default function AccusePage() {
           <div className="mb-1 text-[11px] uppercase text-glass-no font-bold text-center" style={{ fontFamily: 'var(--font-mono)' }}>
             ⚠ One accusation only
           </div>
-          <p className="text-[11px] text-black/50 text-center">
+          <p className="text-[11px] text-white/50 text-center">
             Choose carefully. Once submitted, your answer is final.
           </p>
         </div>
@@ -116,7 +124,7 @@ export default function AccusePage() {
 
       <div className="glass-card mb-4">
         <div className="glass-body">
-          <p className="mb-4 text-[14px] font-bold text-black" style={{ fontFamily: 'var(--font-mono)' }}>
+          <p className="mb-4 text-[14px] font-bold text-white" style={{ fontFamily: 'var(--font-mono)' }}>
             Who killed Lee T. Code?
           </p>
           <div className="space-y-1">
@@ -126,8 +134,8 @@ export default function AccusePage() {
                 onClick={() => setSelected(suspect.id)}
                 className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[13px] transition-colors ${
                   selected === suspect.id
-                    ? 'bg-black/10 text-black'
-                    : 'text-black/80 hover:bg-black/5'
+                    ? 'bg-white/10 text-white'
+                    : 'text-white/80 hover:bg-white/5'
                 }`}
               >
                 <span className={`glass-check ${selected === suspect.id ? 'glass-check-checked' : ''}`} />

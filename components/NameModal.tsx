@@ -7,39 +7,56 @@ import { useGameState } from '@/lib/store';
 export default function NameModal() {
   const pathname = usePathname();
   const { playerName, setPlayerName, hydrated } = useGameState();
-  const [input, setInput] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   if (pathname === '/penances' || pathname === '/penances-display') return null;
   if (!hydrated || playerName) return null;
+
+  const canSubmit = name.trim() && email.trim();
+
+  const handleSubmit = () => {
+    if (canSubmit) setPlayerName(name.trim(), email.trim());
+  };
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-6">
       <div className="white-card w-full max-w-[340px]">
         <div className="white-card-header">Identify Yourself</div>
         <div className="p-6 space-y-4">
-          <p className="text-[12px] text-black/50">
-            Enter your name to join the investigation.
+          <p className="text-[12px] text-white/50">
+            Enter your details to join the investigation.
           </p>
           <input
             type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && input.trim()) {
-                setPlayerName(input.trim());
+              if (e.key === 'Enter') {
+                const emailInput = document.getElementById('email-input');
+                emailInput?.focus();
               }
             }}
             placeholder="Your name"
             maxLength={20}
             autoFocus
-            className="w-full rounded-lg border border-[#e0e0e0] bg-[#f8f8f8] px-4 py-3 text-[13px] text-black outline-none placeholder:text-black/30 focus:border-green"
+            className="w-full rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-[13px] text-white outline-none placeholder:text-white/30 focus:border-green"
+          />
+          <input
+            id="email-input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && canSubmit) handleSubmit();
+            }}
+            placeholder="Your email"
+            className="w-full rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-[13px] text-white outline-none placeholder:text-white/30 focus:border-green"
           />
           <div className="flex justify-end">
             <button
-              onClick={() => {
-                if (input.trim()) setPlayerName(input.trim());
-              }}
-              disabled={!input.trim()}
+              onClick={handleSubmit}
+              disabled={!canSubmit}
               className="glass-btn disabled:opacity-30"
             >
               Enter
